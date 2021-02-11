@@ -1,6 +1,6 @@
 <template>
-  <v-app id="dayspan" v-cloak>
-    <ds-calendar-app :calendar="calendar"></ds-calendar-app>
+  <v-app id="dayspan">
+    <ds-calendar-app></ds-calendar-app>
   </v-app>
 </template>
 
@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css">
 body, html, #app, #dayspan {
   font-family: Roboto, sans-serif;
   width: 100%;
