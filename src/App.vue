@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="css">
+
 body, html, #app, #dayspan {
   font-family: Roboto, sans-serif;
   width: 100%;
