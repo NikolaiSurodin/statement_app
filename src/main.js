@@ -1,19 +1,21 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import vuetify from 'dayspan-vuetify-2/src/plugins/vuetify'
-import DaySpan from 'dayspan-vuetify-2'
+import vuetify from 'vuetify'
+import DaySpanVuetify from 'dayspan-vuetify'
 
 import VIcon from 'vuetify'
 
 import 'vuetify/dist/vuetify.min.css'
+import 'vuetify/dist/vuetify.css'
+import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import 'dayspan-vuetify-2/src/styles/app.scss'
+
 
 Vue.config.productionTip = false
 Vue.use(vuetify)
 Vue.use(VIcon)
-Vue.use(DaySpan, {
+Vue.use(DaySpanVuetify, {
   methods: {
     getDefaultEventColor: () => '#1976d2'
   }

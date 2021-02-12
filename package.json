@@ -10,13 +10,13 @@
   "dependencies": {
     "babel-loader": "^8.2.2",
     "core-js": "^3.6.5",
-    "dayspan-vuetify-2": "^0.2.0",
+    "dayspan-vuetify": "^0.4.0",
     "fibers": "^5.0.0",
     "material-design-icons-iconfont": "^6.1.0",
     "moment": "^2.29.1",
     "vue": "^2.6.12",
     "vue-style-loader": "^4.1.2",
-    "vuetify": "^2.4.4"
+    "vuetify": "^1.1.17"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
