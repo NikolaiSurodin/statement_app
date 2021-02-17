@@ -8,6 +8,8 @@ import VIcon from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'dayspan-vuetify/src/styles/app.scss'
+import 'vuetify/dist/vuetify.css'
+
 import { dsBind, dsDefaults, dsMergeOptions, dsMergeValidate } from 'dayspan-vuetify/src/functions'
 import { default as Component } from 'dayspan-vuetify/src/component'
 
