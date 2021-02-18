@@ -9,10 +9,7 @@
   },
   "dependencies": {
     "babel-loader": "^7.1.5",
-    "dayspan": "^1.1.0",
     "dayspan-vuetify": "0.2.3",
-    "material-design-icons-iconfont": "^6.1.0",
-    "moment": "^2.29.1",
     "vue": "2.5.16",
     "vuetify": "1.1.9"
   },
@@ -20,7 +17,6 @@
     "@vue/cli-plugin-babel": "^3.0.0-rc.10",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.10",
     "@vue/cli-service": "^3.0.0-rc.10",
-    "babel-eslint": "^10.1.0",
     "vue-template-compiler": "2.5.16"
   },
   "eslintConfig": {
