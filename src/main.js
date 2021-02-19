@@ -12,12 +12,12 @@ Vue.config.productionTip = false
 Vue.use(Vuetify);
 
 Vue.use(DaySpanVuetify, {
-    methods: {
-        getDefaultEventColor: () => '#1976d2'
-    }
+  methods: {
+    getDefaultEventColor: () => '#1976d2'
+  }
 });
 
 new Vue({
-    el: '#app',
-    render: h => h(App)
+  el: '#app',
+  render: h => h(App)
 })
