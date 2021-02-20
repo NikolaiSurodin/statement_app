@@ -1,22 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import records from "@/store/modules/records";
 
 Vue.use(Vuex)
 
-const moduleEvents = {
-    state:() => ({
-        events:[]
-    }),
-    actions:{
-
-
-    },
-    mutations:{
-
-    },
-    getters:{
-        events(state){
-            return state.events
-        }
+export const store = new Vuex.Store({
+    modules: {
+        records
     }
-}
+})

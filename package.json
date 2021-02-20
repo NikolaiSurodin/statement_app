@@ -10,8 +10,10 @@
   "dependencies": {
     "babel-loader": "^7.1.5",
     "dayspan-vuetify": "0.2.3",
+    "store": "^2.0.12",
     "vue": "2.5.16",
-    "vuetify": "1.1.9"
+    "vuetify": "1.1.9",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.10",
