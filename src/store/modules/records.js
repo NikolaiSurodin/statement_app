@@ -1,6 +1,6 @@
 export default {
     state: {
-        savedState: JSON.parse(localStorage.getItem('calendarstate')) || null,
+        savedState: JSON.parse(localStorage.getItem('calendarState')) || null,
     },
     actions: {
         saveRecords({commit}, payload) {
@@ -10,7 +10,7 @@ export default {
     mutations: {
         saveEvents(state, payload) {
             state.savedState = payload
-            localStorage.setItem('calendarstate', JSON.stringify(state.savedState))
+            localStorage.setItem('calendarState', JSON.stringify(state.savedState))
         },
         loadState() {
         },
