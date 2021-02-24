@@ -27,7 +27,7 @@
 
 <script>
 
-import Navigation from "@/components/navigation";
+import Navigation from "@/view/navigation";
 
 export default {
   name: "login",

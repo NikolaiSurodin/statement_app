@@ -63,7 +63,7 @@
 <script>
 import {Calendar} from 'dayspan'
 import Vue from 'vue'
-import Navigation from "@/components/navigation";
+import Navigation from "@/view/navigation";
 
 export default {
   name: 'calendar',
