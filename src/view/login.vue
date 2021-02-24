@@ -21,7 +21,6 @@
         </div>
       </v-container>
     </v-form>
-    <navigation />
   </div>
 </template>
 

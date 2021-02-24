@@ -6,7 +6,7 @@
             v-model="firstname"
             :rules="nameRules"
             :counter="10"
-            label="Заполните имя"
+            label="Имя"
             required
         ></v-text-field>
 
@@ -14,7 +14,7 @@
             v-model="lastname"
             :rules="nameRules"
             :counter="10"
-            label="Заполните фамилию"
+            label="Фамилия"
             required
         ></v-text-field>
 

@@ -5,6 +5,7 @@ import register from "@/view/register"
 import login from "@/view/login"
 import notFound from '@/components/notFound'
 
+
 Vue.use(Router)
 export default new Router({
     mode:'history',

@@ -10,8 +10,7 @@
       </template>
 
       <template slot="menuRight">
-        <v-btn icon large href="https://github.com/ClickerMonkey/dayspan-vuetify" target="_blank">
-        </v-btn>
+        <v-btn color="info" type="button" @click="goOut">Выйти</v-btn>
       </template>
 
       <template slot="eventPopover" slot-scope="slotData">
@@ -130,6 +129,9 @@ export default {
             ev.data = Vue.util.extend(defaults, ev.data)
           })
           this.$refs.app.setState(state)
+        },
+        goOut(){
+          this.$router.push('/')
         }
       },
   computed: {
