@@ -13,11 +13,11 @@
       </template>
 
       <template slot="eventPopover" slot-scope="slotData">
-        <ds-calendar-event-popover
+        <ds-calendar-event-create-popover
             v-bind="slotData"
             :read-only="readOnly"
             @finish="saveState"
-        ></ds-calendar-event-popover>
+        ></ds-calendar-event-create-popover>
       </template>
 
       <template slot="eventCreatePopover" slot-scope="{placeholder, calendar, close}">
@@ -27,6 +27,15 @@
             :close="$refs.app.$refs.calendar.clearPlaceholder"
             @create-edit="$refs.app.editPlaceholder"
             @create-popover-closed="saveState"
+            :prompts="{
+              description:  true,
+              color:        true,
+              location:     false,
+              calendar:     false,
+              busy:         false,
+              icon:         false,
+              guests:       false
+            }"
         ></ds-calendar-event-create-popover>
       </template>
 
@@ -43,15 +52,6 @@
         <div class="ds-ev-description">{{ getCalendarTime(calendarEvent) }}</div>
       </template>
 
-      <template slot="drawerBottom">
-        <div class="pa-3">
-          <v-checkbox
-              label="Read Only?"
-              v-model="readOnly"
-          ></v-checkbox>
-        </div>
-      </template>
-
     </ds-calendar-app>
 
   </v-app>
@@ -60,7 +60,9 @@
 
 <script>
 import {Calendar} from 'dayspan'
+
 import Vue from 'vue'
+
 export default {
   name: 'calendar',
   data: () => ({
@@ -125,9 +127,10 @@ export default {
           })
           this.$refs.app.setState(state)
         },
-        goOut(){
+        goOut() {
           this.$router.push('/')
-        }
+        },
+
       },
   computed: {
     savedState() {
@@ -143,6 +146,7 @@ body, html, #app, #dayspan {
   width: 100%;
   height: 100%;
 }
+
 .v-btn--flat,
 .v-text-field--solo .v-input__slot {
   background-color: #f5f5f5 !important;
