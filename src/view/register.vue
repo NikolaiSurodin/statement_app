@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div class="title">
+      <h1>Добро пожаловать!</h1>
+    </div>
+    <div class="description">
+      <b>
+        Введите данные для регистрации и нажмите "Зарегистрироваться"<br>
+        Если есть аккуант, нажмите "Войти"
+      </b>
+    </div>
     <v-form v-model="valid">
       <v-container class="card">
         <v-text-field
@@ -100,9 +109,21 @@ export default {
   position: center;
   display: block;
   margin-top: 100px;
+  background: #e7e7e7; /* Цвет фона */
+  outline: 2px solid #000; /* Чёрная рамка */
+  border: 3px solid #fff; /* Белая рамка */
+  border-radius: 10px;
 }
 
 .buttons {
   margin-top: 20px;
+}
+.title{
+  text-align: center;
+  margin-top: 20px;
+}
+.description{
+  text-align: center;
+  margin-top: 50px;
 }
 </style>

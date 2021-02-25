@@ -1,7 +1,13 @@
 <template>
   <div>
+    <div class="title">
+      <h1>Calendar</h1>
+    </div>
     <v-form v-model="valid">
       <v-container class="card">
+        <div class="text">
+          Введите данные для входа:
+        </div>
         <v-text-field
             v-model="email"
             :rules="emailRules"
@@ -26,11 +32,8 @@
 
 <script>
 
-import Navigation from "@/view/navigation";
-
 export default {
   name: "login",
-  components: {Navigation},
   data: () => ({
     valid: false,
     password: '',
@@ -58,9 +61,19 @@ export default {
   max-width: 500px;
   position: center;
   margin-top: 300px;
+  width: 500px;
+  display: block;
+  background: #e7e7e7; /* Цвет фона */
+  outline: 2px solid #000; /* Чёрная рамка */
+  border: 3px solid #fff; /* Белая рамка */
+  border-radius: 10px;
 }
 
 .buttons {
+  margin-top: 20px;
+}
+.title{
+  text-align: center;
   margin-top: 20px;
 }
 </style>
