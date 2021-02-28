@@ -1,23 +1,21 @@
 <template>
   <v-app id="dayspan" v-cloak>
+
     <ds-calendar-app ref="app"
                      :calendar="calendar"
                      :read-only="readOnly"
                      @change="saveState">
+
       <template slot="title">
         Calendar Events
       </template>
 
-      <template slot="menuRight">
-        <v-btn color="info" type="button" @click="goOut">Выйти</v-btn>
-      </template>
-
       <template slot="eventPopover" slot-scope="slotData">
-        <ds-calendar-event-create-popover
+        <ds-calendar-event-popover
             v-bind="slotData"
             :read-only="readOnly"
             @finish="saveState"
-        ></ds-calendar-event-create-popover>
+        ></ds-calendar-event-popover>
       </template>
 
       <template slot="eventCreatePopover" slot-scope="{placeholder, calendar, close}">
@@ -25,17 +23,17 @@
             :calendar-event="placeholder"
             :calendar="calendar"
             :close="$refs.app.$refs.calendar.clearPlaceholder"
-            @create-edit="$refs.app.editPlaceholder"
-            @create-popover-closed="saveState"
             :prompts="{
               description:  true,
-              color:        true,
+              color:        false,
               location:     false,
               calendar:     false,
               busy:         false,
               icon:         false,
               guests:       false
             }"
+            @create-edit="$refs.app.editPlaceholder"
+            @create-popover-closed="saveState"
         ></ds-calendar-event-create-popover>
       </template>
 
@@ -55,13 +53,11 @@
     </ds-calendar-app>
 
   </v-app>
-
 </template>
 
 <script>
-import {Calendar} from 'dayspan'
-
-import Vue from 'vue'
+import {Calendar, Weekday, Month} from 'dayspan';
+import Vue from 'vue';
 
 export default {
   name: 'calendar',
@@ -85,26 +81,27 @@ export default {
     ]
   }),
   mounted() {
-    window.app = this.$refs.app
-    this.loadState()
+    window.app = this.$refs.app;
+    this.loadState();
   },
   methods:
       {
         getCalendarTime(calendarEvent) {
-          let sa = calendarEvent.start.format('a')
-          let ea = calendarEvent.end.format('a')
-          let sh = calendarEvent.start.format('h')
-          let eh = calendarEvent.end.format('h')
+          let sa = calendarEvent.start.format('a');
+          let ea = calendarEvent.end.format('a');
+          let sh = calendarEvent.start.format('h');
+          let eh = calendarEvent.end.format('h');
           if (calendarEvent.start.minute !== 0) {
-            sh += calendarEvent.start.format(':mm')
+            sh += calendarEvent.start.format(':mm');
           }
           if (calendarEvent.end.minute !== 0) {
-            eh += calendarEvent.end.format(':mm')
+            eh += calendarEvent.end.format(':mm');
           }
-          return (sa === ea) ? (sh + ' - ' + eh + ea) : (sh + sa + ' - ' + eh + ea)
+          return (sa === ea) ? (sh + ' - ' + eh + ea) : (sh + sa + ' - ' + eh + ea);
         },
         saveState() { // сохранение в локалсторадже записей
-          this.$store.dispatch('saveRecords', this.calendar.toInput(true))
+          let records = this.calendar.toInput(true);
+          this.$store.dispatch('saveRecords', records)
         },
         loadState() {
           //показ при загрузке записей
@@ -115,7 +112,6 @@ export default {
               state.preferToday = false
             }
           } catch (e) {
-            // eslint-disable-next-line
             console.log(e)
           }
           if (!state.events || !state.events.length) {
@@ -126,11 +122,7 @@ export default {
             ev.data = Vue.util.extend(defaults, ev.data)
           })
           this.$refs.app.setState(state)
-        },
-        goOut() {
-          this.$router.push('/')
-        },
-
+        }
       },
   computed: {
     savedState() {
