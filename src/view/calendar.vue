@@ -9,6 +9,9 @@
       <template slot="title">
         Calendar Events
       </template>
+      <template slot="menuRight">
+        <v-btn color="info" type="button" @click="goOut">Выйти</v-btn>
+      </template>
 
       <template slot="eventPopover" slot-scope="slotData">
         <ds-calendar-event-popover
@@ -122,13 +125,16 @@ export default {
             ev.data = Vue.util.extend(defaults, ev.data)
           })
           this.$refs.app.setState(state)
-        }
+        },
+        goOut() {
+          this.$router.push('/')
+        },
       },
   computed: {
     savedState() {
       return this.$store.getters.calendarState
     }
-  }
+  },
 }
 </script>
 

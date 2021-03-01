@@ -5,10 +5,14 @@
 </template>
 
 <script>
-
+import { store } from "@/store"
 export default {
-
+    name:'App',
+  beforeMount() {
+      store.dispatch('checkAuth')
+    .then(() => {})
   }
+}
 </script>
 
 <style>
