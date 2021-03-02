@@ -11,6 +11,14 @@ export default {
   beforeMount() {
       store.dispatch('checkAuth')
     .then(() => {})
+  },
+  mounted() {
+      this.$root.$on('logout',() =>{
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/')
+        })
+      })
   }
 }
 </script>

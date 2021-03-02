@@ -1,4 +1,6 @@
 import axios from "axios";
+import {store} from "@/store";
+
 
 export default {
     state: {
@@ -11,11 +13,11 @@ export default {
         submitLogin({commit}, data) {
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url: '', data, method: 'POST'})
+                axios({url: 'https://sel-api.justplay.gg/token/auth', data, method: 'POST'})
                     .then(response => {
                             const token = response.data.token
                             commit('auth_success', token, data)
-                            this.dispatch('setAuth')
+                            this.dispatch('setAuthHeader')
                             resolve(response)
                         })
                     .catch(err => {
@@ -53,6 +55,7 @@ export default {
         },
         set_token(state, token){
           localStorage.setItem('token', token)
+          state.token = localStorage.getItem('token')
         },
         logout(state) {
             state.status = null

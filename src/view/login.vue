@@ -37,11 +37,12 @@
               v-model="password"
               :rules="passwordRules"
               label="Пароль"
+              type="password"
               required
           ></v-text-field>
 
           <div class="buttons">
-            <button class="v-btn" @click="toCalendar" :disabled="!valid">Войти!</button>
+            <button class="v-btn" type="submit" @click.prevent="submitLogin" :disabled="!valid">Войти!</button>
           </div>
         </v-container>
       </v-form>
@@ -58,6 +59,7 @@ export default {
     valid: false,
     password: '',
     email: '',
+    error: false,
     emailRules: [
       v => !!v || 'E-mail заполнить обязательно',
       v => /.+@.+/.test(v) || 'Проверьте, пожалуйста, E-mail',
@@ -67,8 +69,17 @@ export default {
     ]
   }),
   methods: {
-    toCalendar() {
-      this.$router.push('/calendar')
+    submitLogin() {
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('submitLogin', user)
+          .then(() => this.$router.push('/calendar'))
+          .catch((error) => {
+            console.log(error)
+            this.error = true
+          })
     }
   }
 }
@@ -92,7 +103,8 @@ export default {
 .buttons {
   margin-top: 20px;
 }
-.title{
+
+.title {
   text-align: center;
   margin-top: 20px;
 }
