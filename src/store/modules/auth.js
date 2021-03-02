@@ -5,9 +5,8 @@ import {store} from "@/store";
 export default {
     state: {
         user: [],
-        status:'',
+        status: '',
         token: localStorage.getItem('token')
-
     },
     actions: {
         submitLogin({commit}, data) {
@@ -15,11 +14,11 @@ export default {
                 commit('auth_request')
                 axios({url: 'https://sel-api.justplay.gg/token/auth', data, method: 'POST'})
                     .then(response => {
-                            const token = response.data.token
-                            commit('auth_success', token, data)
-                            this.dispatch('setAuthHeader')
-                            resolve(response)
-                        })
+                        const token = response.data.token
+                        commit('auth_success', token, data)
+                        this.dispatch('setAuthHeader')
+                        resolve(response)
+                    })
                     .catch(err => {
                         commit('auth_error')
                         localStorage.removeItem('token')
@@ -27,20 +26,20 @@ export default {
                     })
             })
         },
-        logout({commit}){
+        logout({commit}) {
             return new Promise((resolve, reject) => {
-              commit('logout')
-              localStorage.removeItem('token')
-              delete axios.defaults.headers.common['Authorization']
-              resolve()
-              reject()
+                commit('logout')
+                localStorage.removeItem('token')
+                delete axios.defaults.headers.common['Authorization']
+                resolve()
+                reject()
             })
         },
-        setAuthHeader(){
+        setAuthHeader() {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.getters.token}`
         },
-        checkAuth(){
-            if (this.getters.isLoggedIn){
+        checkAuth() {
+            if (this.getters.isLoggedIn) {
                 return this.dispatch('setAuthHeader')
             }
             return this.dispatch('logout')
@@ -53,18 +52,18 @@ export default {
             store.commit('set_token', token)
             state.user = user
         },
-        set_token(state, token){
-          localStorage.setItem('token', token)
-          state.token = localStorage.getItem('token')
+        set_token(state, token) {
+            localStorage.setItem('token', token)
+            state.token = localStorage.getItem('token')
         },
         logout(state) {
             state.status = null
             state.token = null
         },
-        auth_request(state){
+        auth_request(state) {
             state.status = 'loading'
         },
-        auth_error(state){
+        auth_error(state) {
             state.status = 'error'
         }
 

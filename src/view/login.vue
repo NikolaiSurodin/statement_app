@@ -1,9 +1,14 @@
 <template>
   <div>
+    <template>
+      <message-error
+          v-if="error"
+          @closePopup="closePopup"
+      />
+    </template>
     <div>
       <v-jumbotron
           :gradient="gradient"
-
           dark
           src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
       >
@@ -14,7 +19,6 @@
               <div class="description">
                 <b>
                   Введите данные для входа <br>
-
                 </b>
               </div>
             </v-flex>
@@ -51,9 +55,11 @@
 </template>
 
 <script>
+import messageError from "@/components/messageError";
 
 export default {
   name: "login",
+  components: {messageError},
   data: () => ({
     gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
     valid: false,
@@ -78,8 +84,13 @@ export default {
           .then(() => this.$router.push('/calendar'))
           .catch((error) => {
             console.log(error)
-            this.error = true
+            this.error = !this.error
+            this.email = ''
+            this.password = ''
           })
+    },
+    closePopup(){
+      this.error = false
     }
   }
 }
