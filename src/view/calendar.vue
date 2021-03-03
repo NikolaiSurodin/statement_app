@@ -1,7 +1,7 @@
 <template>
   <v-app id="dayspan" v-cloak>
 
-    <ds-calendar-app ref="app"
+    <ds-calendar-app ref="app" v-if="loggedIn"
                      :calendar="calendar"
                      :read-only="readOnly"
                      @change="saveState">
@@ -10,7 +10,7 @@
         Calendar Events
       </template>
       <template slot="menuRight">
-        <v-btn color="info" type="button" @click="goOut">Выйти</v-btn>
+        <v-btn color="info" type="button" @click="logout">Выйти</v-btn>
       </template>
 
       <template slot="eventPopover" slot-scope="slotData">
@@ -61,6 +61,8 @@
 <script>
 import {Calendar, Weekday, Month} from 'dayspan';
 import Vue from 'vue';
+
+
 
 export default {
   name: 'calendar',
@@ -126,14 +128,18 @@ export default {
           })
           this.$refs.app.setState(state)
         },
-        goOut() {
-          this.$router.push('/')
-        },
+        logout() {
+          this.$root.$emit('logout')
+        }
       },
   computed: {
     savedState() {
       return this.$store.getters.calendarState
+    },
+    loggedIn(){
+      return this.$store.getters.isLoggedIn
     }
+
   },
 }
 </script>

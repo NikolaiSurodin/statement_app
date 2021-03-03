@@ -10,13 +10,15 @@ export default {
     name:'App',
   beforeMount() {
       store.dispatch('checkAuth')
-    .then(() => {})
+    .then(() => {
+
+    })
   },
   mounted() {
       this.$root.$on('logout',() =>{
         this.$store.dispatch('logout')
         .then(() => {
-          this.$router.push('/')
+          this.$router.push('/register')
         })
       })
   }
