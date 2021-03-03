@@ -20,6 +20,7 @@ const router = new Router({
             path: '/login',
             component: login
         },
+
         {
             path: '/calendar',
             component: calendar,

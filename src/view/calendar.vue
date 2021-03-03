@@ -1,32 +1,45 @@
 <template>
-  <v-app id="dayspan" v-cloak>
+  <div>
+    <template>
+      <profile
+          v-if="showProfile"
+          @closeProfileInfo="closeProfileInfo"
+      />
+    </template>
+    <v-app id="dayspan" v-cloak>
 
-    <ds-calendar-app ref="app" v-if="loggedIn"
-                     :calendar="calendar"
-                     :read-only="readOnly"
-                     @change="saveState">
+      <ds-calendar-app ref="app" v-if="loggedIn"
+                       :calendar="calendar"
+                       :read-only="readOnly"
+                       @change="saveState">
 
-      <template slot="title">
-        Calendar Events
-      </template>
-      <template slot="menuRight">
-        <v-btn color="info" type="button" @click="logout">Выйти</v-btn>
-      </template>
+        <template slot="title">
+          Calendar Events
+        </template>
+        <template slot="menuRight">
+          <ul class="right hide-on-small-and-down">
+            <v-btn class="black-text" @click="showProfile = !showProfile">
+              <i class="material-icons">account_circle</i>Профиль
+            </v-btn>
+            <v-btn href="#" class="black-text" @click.prevent="logout">
+              <i class="material-icons">assignment_return</i>Выйти
+            </v-btn>
+          </ul>
+        </template>
+        <template slot="eventPopover" slot-scope="slotData">
+          <ds-calendar-event-popover
+              v-bind="slotData"
+              :read-only="readOnly"
+              @finish="saveState"
+          ></ds-calendar-event-popover>
+        </template>
 
-      <template slot="eventPopover" slot-scope="slotData">
-        <ds-calendar-event-popover
-            v-bind="slotData"
-            :read-only="readOnly"
-            @finish="saveState"
-        ></ds-calendar-event-popover>
-      </template>
-
-      <template slot="eventCreatePopover" slot-scope="{placeholder, calendar, close}">
-        <ds-calendar-event-create-popover
-            :calendar-event="placeholder"
-            :calendar="calendar"
-            :close="$refs.app.$refs.calendar.clearPlaceholder"
-            :prompts="{
+        <template slot="eventCreatePopover" slot-scope="{placeholder, calendar, close}">
+          <ds-calendar-event-create-popover
+              :calendar-event="placeholder"
+              :calendar="calendar"
+              :close="$refs.app.$refs.calendar.clearPlaceholder"
+              :prompts="{
               description:  true,
               color:        false,
               location:     false,
@@ -35,39 +48,42 @@
               icon:         false,
               guests:       false
             }"
-            @create-edit="$refs.app.editPlaceholder"
-            @create-popover-closed="saveState"
-        ></ds-calendar-event-create-popover>
-      </template>
+              @create-edit="$refs.app.editPlaceholder"
+              @create-popover-closed="saveState"
+          ></ds-calendar-event-create-popover>
+        </template>
 
-      <template slot="eventTimeTitle" slot-scope="{calendarEvent, details}">
-        <div>
-          <v-icon class="ds-ev-icon"
-                  v-if="details.icon"
-                  size="14"
-                  :style="{color: details.forecolor}">
-            {{ details.icon }}
-          </v-icon>
-          <strong class="ds-ev-title">{{ details.title }}</strong>
-        </div>
-        <div class="ds-ev-description">{{ getCalendarTime(calendarEvent) }}</div>
-      </template>
+        <template slot="eventTimeTitle" slot-scope="{calendarEvent, details}">
+          <div>
+            <v-icon class="ds-ev-icon"
+                    v-if="details.icon"
+                    size="14"
+                    :style="{color: details.forecolor}">
+              {{ details.icon }}
+            </v-icon>
+            <strong class="ds-ev-title">{{ details.title }}</strong>
+          </div>
+          <div class="ds-ev-description">{{ getCalendarTime(calendarEvent) }}</div>
+        </template>
 
-    </ds-calendar-app>
-
-  </v-app>
+      </ds-calendar-app>
+    </v-app>
+  </div>
 </template>
 
 <script>
 import {Calendar, Weekday, Month} from 'dayspan';
 import Vue from 'vue';
-
+import MessageError from "@/components/messageError";
+import Profile from "@/view/profile";
 
 
 export default {
   name: 'calendar',
+  components: {Profile, MessageError},
   data: () => ({
     storeKey: 'dayspanState',
+    showProfile: false,
     calendar: Calendar.months(),
     readOnly: false,
     defaultEvents: [
@@ -130,13 +146,16 @@ export default {
         },
         logout() {
           this.$root.$emit('logout')
+        },
+        closeProfileInfo() {
+          this.showProfile = false
         }
       },
   computed: {
     savedState() {
       return this.$store.getters.calendarState
     },
-    loggedIn(){
+    loggedIn() {
       return this.$store.getters.isLoggedIn
     }
 
