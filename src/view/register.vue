@@ -62,8 +62,8 @@
         ></v-text-field>
 
         <div class="buttons">
-          <button class="v-btn" type="button" @click="toCalendar" :disabled="!valid">Зарегистрироваться!</button>
-          <button class="v-btn" type="button" @click="ToLogin">Есть аккаунт! Войти!</button>
+          <button class="v-btn" type="button" @click="register" :disabled="!valid">Зарегистрироваться!</button>
+          <button class="v-btn" type="button" @click="toLogin">Есть аккаунт! Войти!</button>
         </div>
 
       </v-container>
@@ -101,14 +101,21 @@ export default {
     ]
   }),
   methods: {
-    ToLogin() {
+    toLogin() {
       this.$router.push('/login')
     },
-    toCalendar() {
+    register() {
+      const user = {
+        firstname:this.firstname,
+        lastname: this.lastname,
+        password: this.password,
+        passwordRepeat: this.password
+      }
       if (this.passwordRepeat !== this.password) {
         this.password = ''
         this.passwordRepeat = ''
       } else {
+        //this.$store.dispatch('submitRegister', user)
         this.$router.push('/calendar')
       }
     }
