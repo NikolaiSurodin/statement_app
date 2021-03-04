@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
-    "dayspan-vuetify": "0.2.3",
+    "dayspan-vuetify": "0.3.0",
+    "moment": "^2.29.1",
     "store": "^2.0.12",
     "vue": "2.5.16",
     "vue-router": "^3.5.1",
