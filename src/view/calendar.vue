@@ -4,7 +4,10 @@
       <profile
           v-if="showProfile"
           @closeProfileInfo="closeProfileInfo"
-      />
+      >
+      <p> Здесь можно показывать инфу о профиле в целом. если можно будте то поменять данныею также менять языки например </p>
+
+      </profile>
     </template>
     <v-app id="dayspan" v-cloak>
 
