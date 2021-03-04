@@ -5,6 +5,7 @@ import App from './App.vue'
 import {store} from './store'
 import axios from "axios";
 import router from "@/router"
+import ru from "@/locales/ru"
 
 import 'vuetify/dist/vuetify.css'
 import 'vuetify/dist/vuetify.min.css'
@@ -23,18 +24,22 @@ Vue.use(DaySpanVuetify, {
     }
 })
 Vue.$dayspan.supports = {
-    description:  true,
-    color:        false,
-    location:     false,
-    calendar:     false,
-    busy:         false,
-    icon:         false,
-    guests:       false
+    description: true,
+    color: false,
+    location: false,
+    calendar: false,
+    busy: false,
+    icon: false,
+    guests: false
 }
+
+
+//Vue.$dayspan.addLocales('ru', ru)
 
 new Vue({
     el: '#app',
     store,
     router,
+    ru,
     render: h => h(App),
 });

@@ -1,25 +1,3 @@
-<!--<template>-->
-<!--  <div>-->
-<!--    <div class="page-title">-->
-<!--      <h3>Профиль</h3>-->
-<!--    </div>-->
-<!--    <form class="form">-->
-<!--      <div class="input-field">-->
-<!--        <v-input >-->
-
-<!--        </v-input>-->
-<!--        <label>Имя</label>-->
-<!--        <span-->
-<!--            class="helper-text invalid">name</span>-->
-<!--      </div>-->
-<!--      <v-btn type="submit">-->
-<!--        Обновить-->
-<!--        <i class="material-icons right">send</i>-->
-<!--      </v-btn>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</template>-->
-///
 <template>
   <div>
     <div class="popup_wrapper">
@@ -30,9 +8,15 @@
           </div>
         </div>
         <div class="popup__header">
-          <slot>Здесь можно показывать инфу о профиле в целом. если можно будте то поменять данные</slot>
+          <slot></slot>
         </div>
         <div class="popup__content">
+          <v-select
+              label="Language"
+              :items="locales"
+              v-model="currentLocale"
+              @input="setLocale"
+          ></v-select>
           <div>
             <form class="form">
               <div class="input-field">
@@ -51,12 +35,11 @@
         <div class="popup__footer">
           <div class="container">
             <div class="bt">
-              <v-btn color="warning" @click="closeProfile"
+              <v-btn color="success" @click="closeProfile"
               > OK
               </v-btn>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -64,14 +47,24 @@
 </template>
 
 <script>
+import  ru  from "@/locales/ru"
+
 export default {
   name: "profile",
   data() {
-    return {}
+    return {
+      locales:[
+        {value:'ru', text:'Russian'}
+      ],
+      currentLocale:this.locales
+    }
   },
   methods: {
     closeProfile() {
       this.$emit('closeProfileInfo')
+    },
+    setLocale(code){
+
     }
   }
 
