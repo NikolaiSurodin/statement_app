@@ -11,21 +11,23 @@
           <slot></slot>
         </div>
         <div class="popup__content">
-          <v-select
-              label="Language"
-              :items="locales"
-              v-model="currentLocale"
-              @input="setLocale"
-          ></v-select>
           <div>
-            <form class="form">
-              <div class="input-field">
-                <v-text-field
-                    label="Имя"
+            <form v-model="valid">
+              <div>
+                <v-text-field v-model="email"
+                              :rules="emailRules"
+                              required
+                              label="Email"
                 >Name
                 </v-text-field>
+                <v-text-field v-model="password"
+                              :rules="passwordRules"
+                              required
+                              label="Пароль"
+                >password
+                </v-text-field>
               </div>
-              <v-btn type="submit">
+              <v-btn type="submit"  @click.prevent="updateProfile" :disabled="!valid">
                 Обновить
                 <i class="material-icons right">send</i>
               </v-btn>
@@ -47,30 +49,37 @@
 </template>
 
 <script>
-import  ru  from "@/locales/ru"
-import en from "dayspan-vuetify/src/locales/en"
-import * as  moment from 'moment'
 
 export default {
   name: "profile",
   data() {
     return {
-      locales:[
-        {value:'ru', text:'Russian'},
-        {value:'en', text:'English'}
+      valid: false,
+      email: '',
+      password: '',
+      error: false,
+      emailRules: [
+        v => !!v || 'Заполните email',
+        v => /.+@.+/.test(v) || 'Проверьте, пожалуйста, E-mail',
       ],
-      currentLocale:this.$dayspan.currentLocale
+      passwordRules: [
+        v => !!v || 'Проверьте пароль!',
+        v => v.length >= 7 || 'Пароль должен содержать минимум 7 символов'
+      ]
     }
   },
   methods: {
     closeProfile() {
       this.$emit('closeProfileInfo')
     },
-    setLocale(code){
-      moment.locale('ru')
-      this.$dayspan.setLocale(code);
-      this.$refs.app.$forceUpdate();
-      console.log(moment.locale('ru'))
+    updateProfile() {
+      const updateUser = {
+        name: this.name,
+        password: this.password
+      }
+      this.name = ''
+      this.password = ''
+      console.log('click')
     }
   }
 
@@ -91,7 +100,7 @@ export default {
 }
 
 .popup {
-  padding: 150px;
+  padding: 60px;
   position: center;
   top: 500px;
   width: 700px;
@@ -116,6 +125,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .header-content {

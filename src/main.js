@@ -7,8 +7,6 @@ import axios from "axios";
 import router from "@/router"
 import ru from "@/locales/ru"
 
-import en from "dayspan-vuetify/src/locales/en";
-
 import 'vuetify/dist/vuetify.css'
 
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
@@ -36,8 +34,9 @@ Vue.$dayspan.supports = {
     guests: false
 }
 
+
 Vue.$dayspan.addLocale(['ru'], ru)
-Vue.$dayspan.currentLocale = en
+Vue.$dayspan.setLocale('ru')
 
 new Vue({
     el: '#app',

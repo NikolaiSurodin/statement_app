@@ -17,11 +17,11 @@
                        @change="saveState">
 
         <template slot="title">
-          Calendar Events
+          Календарь отпусков
         </template>
         <template slot="menuRight">
           <ul class="right hide-on-small-and-down">
-            <v-btn class="black-text" @click="showProfile = !showProfile">
+            <v-btn class="v-select" @click="showProfile = !showProfile">
               <i class="material-icons">account_circle</i>Профиль
             </v-btn>
             <v-btn href="#" class="black-text" @click.prevent="logout">

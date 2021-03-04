@@ -15,7 +15,6 @@ export default {
     })
   },
   mounted() {
-      console.log(this.$dayspan)
       this.$root.$on('logout',() =>{
         this.$store.dispatch('logout')
         .then(() => {

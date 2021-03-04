@@ -76,6 +76,7 @@ export default {
   }),
   methods: {
     submitLogin() {
+
       const user = {
         email: this.email,
         password: this.password
