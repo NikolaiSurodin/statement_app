@@ -48,15 +48,18 @@
 
 <script>
 import  ru  from "@/locales/ru"
+import en from "dayspan-vuetify/src/locales/en"
+import * as  moment from 'moment'
 
 export default {
   name: "profile",
   data() {
     return {
       locales:[
-        {value:'ru', text:'Russian'}
+        {value:'ru', text:'Russian'},
+        {value:'en', text:'English'}
       ],
-      currentLocale:this.locales
+      currentLocale:this.$dayspan.currentLocale
     }
   },
   methods: {
@@ -64,7 +67,10 @@ export default {
       this.$emit('closeProfileInfo')
     },
     setLocale(code){
-
+      moment.locale('ru')
+      this.$dayspan.setLocale(code);
+      this.$refs.app.$forceUpdate();
+      console.log(moment.locale('ru'))
     }
   }
 
