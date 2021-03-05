@@ -27,7 +27,7 @@
                 >password
                 </v-text-field>
               </div>
-              <v-btn type="submit"  @click.prevent="updateProfile" :disabled="!valid">
+              <v-btn type="submit" @click.prevent="updateProfile" :disabled="!valid">
                 Обновить
                 <i class="material-icons right">send</i>
               </v-btn>
@@ -54,16 +54,14 @@ export default {
   name: "profile",
   data() {
     return {
-      valid: false,
+      valid: true,
       email: '',
       password: '',
       error: false,
       emailRules: [
-        v => !!v || 'Заполните email',
         v => /.+@.+/.test(v) || 'Проверьте, пожалуйста, E-mail',
       ],
       passwordRules: [
-        v => !!v || 'Проверьте пароль!',
         v => v.length >= 7 || 'Пароль должен содержать минимум 7 символов'
       ]
     }
@@ -74,12 +72,12 @@ export default {
     },
     updateProfile() {
       const updateUser = {
-        name: this.name,
+        email: this.email,
         password: this.password
       }
-      this.name = ''
+      this.email = ''
       this.password = ''
-      console.log('click')
+      console.log('click', updateUser)
     }
   }
 

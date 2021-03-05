@@ -100,19 +100,19 @@ export default {
                 time: 'h:mm a'
             },
             labels: {
-                allDay: 'All day',
-                options: 'Options',
-                close: 'Close',
-                day: ['day', 'days'],
-                days: ['day', 'days'],
-                minute: ['minute', 'minutes'],
-                minutes: ['minute', 'minutes'],
-                hour: ['hour', 'hours'],
-                hours: ['hour', 'hours'],
-                week: ['week', 'weeks'],
-                weeks: ['week', 'weeks'],
-                busy: 'Занят',
-                free: 'Свободен'
+                allDay: 'Весь день',
+                options: 'Опции',
+                close: 'Закрыть',
+                day: ['день', 'день'],
+                days: ['день', 'день'],
+                minute: ['минута', 'минута'],
+                minutes: ['минута', 'минута'],
+                hour: ['час', 'час'],
+                hours: ['час', 'час'],
+                week: ['неделя', 'неделя'],
+                weeks: ['неделя', 'неделя'],
+                busy: 'Отпуск',
+                free: 'Отгул'
             }
         },
         dsCalendarEventChip: {
@@ -127,19 +127,19 @@ export default {
                 time: 'h:mm a'
             },
             labels: {
-                allDay: 'All day',
-                options: 'Options',
-                close: 'Close',
-                day: ['day', 'days'],
-                days: ['day', 'days'],
-                minute: ['minute', 'minutes'],
-                minutes: ['minute', 'minutes'],
-                hour: ['hour', 'hours'],
-                hours: ['hour', 'hours'],
-                week: ['week', 'weeks'],
-                weeks: ['week', 'weeks'],
-                busy: 'Занят',
-                free: 'Free'
+                allDay: 'Весь день',
+                options: 'Опции',
+                close: 'Закрыть',
+                day: ['день', 'день'],
+                days: ['день', 'день'],
+                minute: ['минута', 'минута'],
+                minutes: ['минута', 'минута'],
+                hour: ['час', 'час'],
+                hours: ['час', 'час'],
+                week: ['неделя', 'неделя'],
+                weeks: ['неделя', 'неделя'],
+                busy: 'Отпуск',
+                free: 'Отгул'
             }
         },
         dsCalendarEventCreatePopover: {
@@ -160,15 +160,15 @@ export default {
                 hours: ['Час', 'hours'],
                 week: ['Неделя', 'weeks'],
                 weeks: ['Неделя', 'weeks'],
-                busy: 'Занят',
-                free: 'Свободен',
+                busy: 'Отпуск',
+                free: 'Отгул',
                 location: 'Add location',
                 description: 'Описание',
                 calendar: 'Calendar',
             },
             busyOptions: [
-                {text: 'Занят'},
-                {text: 'Свободен'}
+                {text: 'Отпуск'},
+                {text: 'Отгул'}
             ]
         },
         dsSchedule: {
@@ -186,7 +186,7 @@ export default {
                 cancelled: 'These are events or spans of time where events were cancelled.',
                 edit: 'Редактировать событие',
                 add: 'Добавить событие',
-                location: 'Add location',
+                location: 'Добавить локацию',
                 description: 'Добавить описание',
                 calendar: 'Calendar',
                 tabs: {
@@ -198,8 +198,8 @@ export default {
                 }
             },
             busyOptions: [
-                {text: 'Занят'},
-                {text: 'Свободен'}
+                {text: 'Отпуск'},
+                {text: 'Отгул'}
             ]
         },
         dsScheduleActions: {
@@ -218,8 +218,8 @@ export default {
         },
         dsScheduleForecast: {
             labels: {
-                prefix: 'The forecast shows previous & next',
-                suffix: 'event occurrences within a years time.'
+                prefix: 'Прогноз показывает предыдущий и следующий',
+                suffix: 'события, произошедшие в течение года.'
             }
         },
         dsScheduleFrequencyDay: {
@@ -240,7 +240,7 @@ export default {
         dsScheduleFrequencyDayOfWeek: {
             weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четрвег', 'Пятница', 'Суббота'],
             labels: {
-                type: 'Days of week'
+                type: 'Дни недели'
             },
             options: [
                 {text: 'В любой день недели'},
@@ -277,7 +277,7 @@ export default {
 
         dsScheduleFrequencyWeek: {
             labels: {
-                type: 'Weeks'
+                type: 'Неделя'
             },
             options: [
                 {text: 'Любая неделя'},
@@ -300,7 +300,7 @@ export default {
 
         dsScheduleFrequencyYear: {
             labels: {
-                type: 'Years'
+                type: 'Год'
             },
             options: [
                 {text: 'В любой год'},

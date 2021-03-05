@@ -81,13 +81,13 @@ export default {
     valid: false,
     firstname: '',
     lastname: '',
+    email: '',
     password: '',
     passwordRepeat: '',
     nameRules: [
       v => !!v || 'Имя заполнить обязательно!',
       v => v.length <= 20 || 'Максимальное количество символов - 20',
     ],
-    email: '',
     emailRules: [
       v => !!v || 'E-mail заполнить обязательно',
       v => /.+@.+/.test(v) || 'Проверьте, пожалуйста, E-mail',

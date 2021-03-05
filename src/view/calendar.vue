@@ -47,7 +47,7 @@
               color:        false,
               location:     false,
               calendar:     false,
-              busy:         false,
+              busy:         true,
               icon:         false,
               guests:       false
             }"
