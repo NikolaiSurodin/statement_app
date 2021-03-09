@@ -5,7 +5,8 @@
           v-if="showProfile"
           @closeProfileInfo="closeProfileInfo"
       >
-      <p> Здесь можно показывать инфу о профиле в целом. если можно будте то поменять данныею также менять языки например </p>
+        <p> Здесь можно показывать инфу о профиле в целом. если можно будте то поменять данныею также менять языки
+          например </p>
 
       </profile>
     </template>
@@ -84,26 +85,28 @@ import Profile from "@/view/profile";
 export default {
   name: 'calendar',
   components: {Profile, MessageError},
-  data: () => ({
-    storeKey: 'dayspanState',
-    showProfile: false,
-    calendar: Calendar.months(),
-    readOnly: false,
-    defaultEvents: [
-      {
-        data: {
-          title: '',
-          color: '#3F51B5'
-        },
-        schedule: {
-          dayOfWeek: [],
-          times: [],
-          duration: null,
-          durationUnit: 'minutes'
+  data() {
+    return {
+      storeKey: 'dayspanState',
+      showProfile: false,
+      calendar: Calendar.months(),
+      readOnly: false,
+      defaultEvents: [
+        {
+          data: {
+            title: '',
+            color: '#3F51B5'
+          },
+          schedule: {
+            dayOfWeek: [],
+            times: [],
+            duration: null,
+            durationUnit: 'minutes'
+          }
         }
-      }
-    ]
-  }),
+      ]
+    }
+  },
   mounted() {
     window.app = this.$refs.app;
     this.loadState();

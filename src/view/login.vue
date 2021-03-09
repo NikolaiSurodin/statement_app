@@ -46,7 +46,10 @@
           ></v-text-field>
 
           <div class="buttons">
-            <button class="v-btn" type="submit" @click.prevent="submitLogin" :disabled="!valid">Войти!</button>
+            <button class="v-btn" type="submit" @click.prevent="submitLogin" :disabled="!valid">
+              Войти!
+              <i class="material-icons right">check_circle_outline</i>
+            </button>
           </div>
         </v-container>
       </v-form>
@@ -60,20 +63,22 @@ import messageError from "@/components/messageError";
 export default {
   name: "login",
   components: {messageError},
-  data: () => ({
-    gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
-    valid: false,
-    password: '',
-    email: '',
-    error: false,
-    emailRules: [
-      v => !!v || 'E-mail заполнить обязательно',
-      v => /.+@.+/.test(v) || 'Проверьте, пожалуйста, E-mail',
-    ],
-    passwordRules: [
-      v => !!v || 'Проверьте пароль!',
-    ]
-  }),
+  data() {
+    return {
+      gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
+      valid: false,
+      password: '',
+      email: '',
+      error: false,
+      emailRules: [
+        v => !!v || 'E-mail заполнить обязательно',
+        v => /.+@.+/.test(v) || 'Проверьте, пожалуйста, E-mail',
+      ],
+      passwordRules: [
+        v => !!v || 'Проверьте пароль!',
+      ]
+    }
+  },
   methods: {
     submitLogin() {
 
@@ -90,7 +95,7 @@ export default {
             this.password = ''
           })
     },
-    closePopup(){
+    closePopup() {
       this.error = false
     }
   }

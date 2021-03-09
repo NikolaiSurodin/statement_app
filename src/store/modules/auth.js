@@ -31,10 +31,20 @@ export default {
         setAuthHeader() {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.getters.token}`
         },
+        // register({commit}, data) {
+        //     return new Promise((resolve, reject) => {
+        //         commit('auth_register')
+        //         axios({url: '', data, method: 'POST'})
+        //             .then(response => {
+        //                 console.log(response)
+        //             })
+        //             .catch(err => console.log(err))
+        //     })
+        // },
         //разлогинивание. удаляем из локалсторажда токен + заголовок. Возвращает промис
-        logout({commit}){
+        logout({commit}) {
             return new Promise((resolve, reject) => {
-                commit ('logout')
+                commit('logout')
                 localStorage.removeItem('token')
                 delete axios.defaults.headers.common['Authorization']
                 resolve()
@@ -43,8 +53,8 @@ export default {
         },
         //проверка на то, залогинен ли пользователь уже или нет. check
         //проверяем по условию
-        checkAuth(){
-            if (this.getters.isLoggedIn){
+        checkAuth() {
+            if (this.getters.isLoggedIn) {
                 return this.dispatch('setAuthHeader')
             }
             return this.dispatch('logout')
@@ -66,7 +76,7 @@ export default {
         auth_error(state) {
             state.status = 'error'
         },
-        logout(state){
+        logout(state) {
             state.token = null
             state.status = ''
         }
