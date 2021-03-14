@@ -13,7 +13,7 @@ export default {
         submitLogin({commit}, data) {
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url: 'https://sel-api.justplay.gg/token/auth', data, method: 'POST'})
+                axios({url: 'https://vacation-api.thirty3.tools/token/auth' , data, method: 'POST'})
                     .then(response => {
                         const token = response.data.token
                         commit('auth_success', token, data)
