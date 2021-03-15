@@ -6,6 +6,7 @@ import calendar from '@/view/calendar'
 import register from "@/view/register"
 import login from "@/view/login"
 import notFound from '@/components/notFound'
+import userList from "@/view/userList";
 
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ const router = new Router({
         {
             path: '/calendar',
             component: calendar,
+            meta: {auth: true}
+        },
+        {
+            path: '/userList',
+            component: userList,
             meta: {auth: true}
         },
         {

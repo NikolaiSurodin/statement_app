@@ -3,8 +3,8 @@
     <div class="popup_wrapper">
       <div class='popup'>
         <div class="header-content">
-          <div class="page-title">
-            <h3>Профиль</h3>
+          <div class="right">
+            <h3>{{ user.username }}</h3>
           </div>
         </div>
         <div class="popup__header">
@@ -12,27 +12,11 @@
         </div>
         <div class="popup__content">
           <div>
-            <form v-model="valid">
-              <div>
-                <v-text-field v-model="email"
-                              :rules="emailRules"
-                              required
-                              label="Email"
-                >Name
-                </v-text-field>
-                <v-text-field v-model="password"
-                              :rules="passwordRules"
-                              required
-                              label="Пароль"
-                >password
-                </v-text-field>
-              </div>
-              <v-btn type="submit" @click.prevent="updateProfile" :disabled="!valid">
-                Обновить
-                <i class="material-icons right">send</i>
-              </v-btn>
-            </form>
+            <v-btn color="success"
+            > Посмотреть всех сотрудников
+            </v-btn>
           </div>
+
         </div>
         <div class="popup__footer">
           <div class="container">
@@ -40,6 +24,7 @@
               <v-btn color="success" @click="closeProfile"
               > OK
               </v-btn>
+              <router-link to="/userList">UserList</router-link>
             </div>
           </div>
         </div>
@@ -49,11 +34,13 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
   name: "profile",
   data() {
     return {
+      user: '',
       valid: true,
       email: '',
       password: '',
@@ -70,14 +57,17 @@ export default {
     closeProfile() {
       this.$emit('closeProfileInfo')
     },
-    updateProfile() {
-      const updateUser = {
-        email: this.email,
-        password: this.password
-      }
-    }
-  }
+  },
+  created() {
+    return new Promise(resolve => {
+      axios({url: 'https://vacation-api.thirty3.tools/api/v1/admin/auth/me', method: 'GET'})
+          .then(response => {
+            this.user = response.data
+            resolve(response)
+          })
+    })
 
+  }
 }
 </script>
 

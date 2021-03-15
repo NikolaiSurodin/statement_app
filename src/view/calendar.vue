@@ -5,9 +5,6 @@
           v-if="showProfile"
           @closeProfileInfo="closeProfileInfo"
       >
-        <p> Здесь можно показывать инфу о профиле в целом. если можно будте то поменять данныею также менять языки
-          например </p>
-
       </profile>
     </template>
     <v-app id="dayspan" v-cloak>
@@ -21,14 +18,12 @@
           Календарь отпусков
         </template>
         <template slot="menuRight">
-          <ul class="right hide-on-small-and-down">
-            <v-btn class="v-select" @click="showProfile = !showProfile">
-              <i class="material-icons">account_circle</i>Профиль
-            </v-btn>
-            <v-btn href="#" class="black-text" @click.prevent="logout">
-              <i class="material-icons">assignment_return</i>Выйти
-            </v-btn>
-          </ul>
+          <v-btn type="button" @click="showProfile = !showProfile">
+            <i class="material-icons">account_circle</i>{{user.username}}
+          </v-btn>
+          <v-btn href="#" class="black-text" @click.prevent="logout">
+            <i class="material-icons">assignment_return</i>Выйти
+          </v-btn>
         </template>
         <template slot="eventPopover" slot-scope="slotData">
           <ds-calendar-event-popover
@@ -80,13 +75,14 @@ import {Calendar, Weekday, Month} from 'dayspan';
 import Vue from 'vue';
 import MessageError from "@/components/messageError";
 import Profile from "@/view/profile";
-
+import axios from "axios";
 
 export default {
   name: 'calendar',
   components: {Profile, MessageError},
   data() {
     return {
+      user:'',
       storeKey: 'dayspanState',
       showProfile: false,
       calendar: Calendar.months(),
@@ -110,6 +106,7 @@ export default {
   mounted() {
     window.app = this.$refs.app;
     this.loadState();
+    this.userInfo()
   },
   methods:
       {
@@ -155,6 +152,15 @@ export default {
         },
         closeProfileInfo() {
           this.showProfile = false
+        },
+        userInfo() {
+          return new Promise(resolve => {
+            axios({url: 'https://vacation-api.thirty3.tools/api/v1/admin/auth/me', method: 'GET'})
+                .then(response => {
+                  this.user = response.data
+                  resolve(response)
+                })
+          })
         }
       },
   computed: {
@@ -164,7 +170,6 @@ export default {
     loggedIn() {
       return this.$store.getters.isLoggedIn
     }
-
   },
 }
 </script>
