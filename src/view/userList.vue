@@ -6,9 +6,10 @@
           :items="desserts"
           class="elevation-1"
       >
-        <template slot="items" slot-scope="props" v-for="i in desserts">
-          <td >{{i.name}}</td>
-          <td class="text-xs-left"></td>
+        <template slot="items" slot-scope="props"
+        >
+          <td></td>
+          <td class="text-xs-left">{{}}</td>
           <td class="text-xs-left"></td>
           <td class="text-xs-right"></td>
           <td class="text-xs-right"></td>
@@ -22,22 +23,23 @@
 <script>
 
 
+import axios from "axios";
+
 export default {
   name: "userList",
   data() {
     return {
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          text: 'ФИО',
           align: 'left',
           sortable: false,
           value: 'name'
         },
-        {text: 'Calories', value: 'calories'},
-        {text: 'Fat (g)', value: 'fat'},
-        {text: 'Carbs (g)', value: 'carbs'},
-        {text: 'Protein (g)', value: 'protein'},
-        {text: 'Iron (%)', value: 'iron'}
+        {text: 'Email', value: 'Email'},
+        {text: 'День рождение', value: 'birthday'},
+        {text: 'Телефон', value: 'mobile'},
+        {text: 'Должность', value: 'state'}
       ],
       desserts: [
         {
@@ -122,6 +124,12 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+
+  },
+  mounted() {
+    this.register()
   }
 }
 </script>

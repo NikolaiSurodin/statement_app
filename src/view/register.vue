@@ -25,7 +25,7 @@
       <v-form v-model="valid">
         <v-container class="container card">
           <v-text-field
-              v-model="firstname"
+              v-model="user.firstname"
               :rules="nameRules"
               :counter="10"
               label="Имя"
@@ -33,7 +33,7 @@
           ></v-text-field>
 
           <v-text-field
-              v-model="lastname"
+              v-model="user.lastname"
               :rules="nameRules"
               :counter="10"
               label="Фамилия"
@@ -41,7 +41,7 @@
           ></v-text-field>
 
           <v-text-field
-              v-model="email"
+              v-model="user.email"
               :rules="emailRules"
               label="E-mail"
               required
@@ -49,23 +49,28 @@
 
           <v-text-field
               type="number"
-              v-model="mobile"
+              v-model="user.mobile"
               :rules="mobileRules"
               label="Телефон"
               required
           ></v-text-field>
 
           <v-text-field
-              v-model="password"
+              v-model="user.password"
               :rules="passwordRules"
               label="Пароль"
               required
           ></v-text-field>
 
           <v-text-field
-              v-model="passwordConfirm"
+              v-model="user.passwordConfirm"
               :rules="passwordConfirmRules"
               label="Повторите пароль"
+              required
+          ></v-text-field>
+          <v-text-field
+              v-model="user.birthday"
+              label="ДР"
               required
           ></v-text-field>
 
@@ -91,12 +96,16 @@ export default {
     return {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
       valid: false,
-      firstname: '',
-      lastname: '',
-      email: '',
-      mobile:79,
-      password: '',
-      passwordConfirm: '',
+      user:{
+        firstname: '',
+        lastname: '',
+        email: '',
+        mobile:79,
+        birthday:'',
+        password: '',
+        passwordConfirm: ''
+      },
+
       nameRules: [
         v => !!v || 'Имя заполнить обязательно!',
         v => v.length <= 20 || 'Максимальное количество символов - 20',
@@ -107,7 +116,7 @@ export default {
       ],
       mobileRules: [
         v => !!v || 'Заполните номер телефона',
-        v => /.79.+/.test(v) && v.length === 12 || 'Проверьте, пожалуйста, телефон',
+        v => /.79.+/.test && v.length === 12 || 'Проверьте, пожалуйста, телефон',
       ],
       passwordRules: [
         v => !!v || 'Введите пароль!',
@@ -124,17 +133,17 @@ export default {
     },
     register() {
       const user = {
-        firstname: this.firstname,
-        lastname: this.lastname,
-        password: this.password,
-        mobile:this.mobile,
-        passwordConfirm: this.password
+        username: this.user.firstname,
+        password:this.user.password,
+        email: this.user.email,
+        birthday:this.user.birthday,
+        profile:{}
       }
       if (this.passwordConfirm !== this.password) {
         this.password = ''
         this.passwordConfirm = ''
       } else {
-        //this.$store.dispatch('submitRegister', user)
+        this.$store.dispatch('register', user)
         this.$router.push('/calendar')
       }
     }

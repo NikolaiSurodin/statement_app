@@ -27,6 +27,32 @@ export default {
                     })
             })
         },
+        //устанавливаем заголовок запроса
+        setAuthHeader() {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.getters.token}`
+        },
+        register({commit}, data) {
+            return new Promise((resolve, reject) => {
+
+                axios({url: 'https://vacation-api.thirty3.tools/api/v1/frontend/users', data, method: 'POST'})
+                    .then(response => {
+                        const user = response.data
+                        commit('auth_register', user, data)
+                        resolve(response)
+                    })
+                    .catch(err => console.log(err))
+            })
+        },
+        //разлогинивание. удаляем из локалсторажда токен + заголовок. Возвращает промис
+        logout({commit}) {
+            return new Promise((resolve, reject) => {
+                commit('logout')
+                localStorage.removeItem('token')
+                delete axios.defaults.headers.common['Authorization']
+                resolve()
+                reject()
+            })
+        },
         infoUser({commit}) {
             return new Promise(resolve => {
                 axios
@@ -39,30 +65,6 @@ export default {
 
             })
         },
-        //устанавливаем заголовок запроса
-        setAuthHeader() {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.getters.token}`
-        },
-        // register({commit}, data) {
-        //     return new Promise((resolve, reject) => {
-        //         commit('auth_register')
-        //         axios({url: '', data, method: 'POST'})
-        //             .then(response => {
-        //                 console.log(response)
-        //             })
-        //             .catch(err => console.log(err))
-        //     })
-        // },
-        //разлогинивание. удаляем из локалсторажда токен + заголовок. Возвращает промис
-        logout({commit}) {
-            return new Promise((resolve, reject) => {
-                commit('logout')
-                localStorage.removeItem('token')
-                delete axios.defaults.headers.common['Authorization']
-                resolve()
-                reject()
-            })
-        },
         //проверка на то, залогинен ли пользователь уже или нет. check
         //проверяем по условию
         checkAuth() {
@@ -71,14 +73,6 @@ export default {
             }
             return this.dispatch('logout')
         },
-        checkAdminAuth({commit}) {
-            return axios
-                .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/check')
-                .then(response => {
-                    commit(admin_auth)
-                    console.log(response)
-                })
-        }
 
     },
     mutations: {
@@ -104,9 +98,11 @@ export default {
             state.token = null
             state.status = ''
         },
-        admin_auth(state, status){
-            status.status = 'admin'
+        auth_register(state, user) {
+            state.user = user
         }
+
+
     },
     getters: {
         token: state => state.token,
