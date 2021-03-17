@@ -1,27 +1,29 @@
 <template>
-<v-content>
-  <v-data-table
-    :headers="headers"
-    :items="desserts"
-    class="elevation-1"
->
-  <template v-slot:items="props">
-    <td></td>
-    <td class="text-xs-right">{{}}</td>
-    <td class="text-xs-right"></td>
-    <td class="text-xs-right"></td>
-    <td class="text-xs-right"></td>
-    <td class="text-xs-right"></td>
-  </template>
-</v-data-table>
-</v-content>
+  <div>
+    <v-content>
+      <v-data-table
+          :headers="headers"
+          :items="desserts"
+          class="elevation-1"
+      >
+        <template slot="items" slot-scope="props" v-for="i in desserts">
+          <td >{{i.name}}</td>
+          <td class="text-xs-left"></td>
+          <td class="text-xs-left"></td>
+          <td class="text-xs-right"></td>
+          <td class="text-xs-right"></td>
+          <td class="text-xs-right"></td>
+        </template>
+      </v-data-table>
+    </v-content>
+  </div>
 </template>
 
 <script>
 
+
 export default {
   name: "userList",
-
   data() {
     return {
       headers: [
@@ -31,11 +33,11 @@ export default {
           sortable: false,
           value: 'name'
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Iron (%)', value: 'iron' }
+        {text: 'Calories', value: 'calories'},
+        {text: 'Fat (g)', value: 'fat'},
+        {text: 'Carbs (g)', value: 'carbs'},
+        {text: 'Protein (g)', value: 'protein'},
+        {text: 'Iron (%)', value: 'iron'}
       ],
       desserts: [
         {

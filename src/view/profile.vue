@@ -24,15 +24,16 @@
               <v-btn color="success" @click="closeProfile"
               > OK
               </v-btn>
-              <v-btn color="warning" to="/editprofile"
+              <v-btn color="warning" @click="ToUserProfile"
               > Редактировать профиль
+                <i class="material-icons right">edit</i>
               </v-btn>
             </div>
           </div>
-
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -57,6 +58,9 @@ export default {
   methods: {
     closeProfile() {
       this.$emit('closeProfileInfo')
+    },
+    ToUserProfile(){
+      this.$router.push(`/editprofile/${this.user.id}`)
     }
   },
   computed: {

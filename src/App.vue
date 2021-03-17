@@ -11,7 +11,6 @@ export default {
   beforeMount() {
       store.dispatch('checkAuth')
     .then(() => {
-
     })
   },
   mounted() {

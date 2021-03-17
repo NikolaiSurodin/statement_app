@@ -29,7 +29,6 @@ export default {
         },
         infoUser({commit}) {
             return new Promise(resolve => {
-
                 axios
                     .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/me')
                     .then(response => {
@@ -72,6 +71,14 @@ export default {
             }
             return this.dispatch('logout')
         },
+        checkAdminAuth({commit}) {
+            return axios
+                .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/check')
+                .then(response => {
+                    commit(admin_auth)
+                    console.log(response)
+                })
+        }
 
     },
     mutations: {
@@ -96,6 +103,9 @@ export default {
         logout(state) {
             state.token = null
             state.status = ''
+        },
+        admin_auth(state, status){
+            status.status = 'admin'
         }
     },
     getters: {

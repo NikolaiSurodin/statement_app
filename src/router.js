@@ -34,9 +34,19 @@ const router = new Router({
             meta: {auth: true}
         },
         {
-            path: '/editprofile',
-            component: editProfile,
-            meta: {auth: true}
+            path: '/editprofile/:id',
+            meta: {auth: true},
+            component: {
+                render(c) {
+                    return c('router-view')
+                }
+            },
+            children:[
+                {
+                    path:'',
+                    component:editProfile
+                }
+            ]
         },
         {
             path: '*',
