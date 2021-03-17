@@ -59,6 +59,7 @@
 
 <script>
 import messageError from "@/components/messageError";
+import axios from "axios";
 
 export default {
   name: "login",
@@ -81,7 +82,6 @@ export default {
   },
   methods: {
     submitLogin() {
-
       const user = {
         email: this.email,
         password: this.password

@@ -3,20 +3,20 @@
     <div class="popup_wrapper">
       <div class='popup'>
         <div class="header-content">
-          <div class="right">
-            <h3>{{ user.username }}</h3>
-          </div>
+          <h1>{{user.username}}</h1>
         </div>
         <div class="popup__header">
           <slot></slot>
         </div>
         <div class="popup__content">
           <div>
-            <v-btn color="success"
-            > Посмотреть всех сотрудников
-            </v-btn>
+            <h3>Общие</h3>
+            <div class="right">
+              <p>email: </p>
+              <p>телефон</p>
+              <p>адрес</p>
+            </div>
           </div>
-
         </div>
         <div class="popup__footer">
           <div class="container">
@@ -24,9 +24,12 @@
               <v-btn color="success" @click="closeProfile"
               > OK
               </v-btn>
-              <router-link to="/userList">UserList</router-link>
+              <v-btn color="warning" to="/editprofile"
+              > Редактировать профиль
+              </v-btn>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -34,13 +37,11 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "profile",
   data() {
     return {
-      user: '',
       valid: true,
       email: '',
       password: '',
@@ -56,18 +57,17 @@ export default {
   methods: {
     closeProfile() {
       this.$emit('closeProfileInfo')
-    },
+    }
   },
-  created() {
-    return new Promise(resolve => {
-      axios({url: 'https://vacation-api.thirty3.tools/api/v1/admin/auth/me', method: 'GET'})
-          .then(response => {
-            this.user = response.data
-            resolve(response)
-          })
-    })
-
+  computed: {
+    user(){
+      return this.$store.getters.user
+    }
+  },
+  mounted() {
+    return this.$store.dispatch('infoUser')
   }
+
 }
 </script>
 
@@ -85,7 +85,7 @@ export default {
 }
 
 .popup {
-  padding: 60px;
+  padding: 150px;
   position: center;
   top: 500px;
   width: 700px;
@@ -110,14 +110,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .header-content {
   text-align: center;
 }
-
-.bt {
+.bt{
   margin-top: 20px;
   margin-left: 120px;
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { store } from "@/store";
+import {store} from "@/store";
 
 
 export default {
@@ -13,7 +13,7 @@ export default {
         submitLogin({commit}, data) {
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url: 'https://vacation-api.thirty3.tools/token/auth' , data, method: 'POST'})
+                axios({url: 'https://vacation-api.thirty3.tools/token/auth', data, method: 'POST'})
                     .then(response => {
                         const token = response.data.token
                         commit('auth_success', token, data)
@@ -25,6 +25,19 @@ export default {
                         localStorage.removeItem('token')
                         reject(error)
                     })
+            })
+        },
+        infoUser({commit}) {
+            return new Promise(resolve => {
+
+                axios
+                    .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/me')
+                    .then(response => {
+                        const user = response.data
+                        commit('set_user', user)
+                        resolve(response)
+                    })
+
             })
         },
         //устанавливаем заголовок запроса
@@ -58,7 +71,8 @@ export default {
                 return this.dispatch('setAuthHeader')
             }
             return this.dispatch('logout')
-        }
+        },
+
     },
     mutations: {
         auth_request(state) {
@@ -73,6 +87,9 @@ export default {
             localStorage.setItem('token', token)
             state.token = localStorage.getItem('token')
         },
+        set_user(state, user) {
+            state.user = user
+        },
         auth_error(state) {
             state.status = 'error'
         },
@@ -83,6 +100,7 @@ export default {
     },
     getters: {
         token: state => state.token,
+        user: state => state.user,
         isLoggedIn: state => !!state.token
     }
 }

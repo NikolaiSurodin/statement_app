@@ -7,6 +7,7 @@ import register from "@/view/register"
 import login from "@/view/login"
 import notFound from '@/components/notFound'
 import userList from "@/view/userList";
+import editProfile from "@/view/editProfile";
 
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ const router = new Router({
         {
             path: '/userList',
             component: userList,
+            meta: {auth: true}
+        },
+        {
+            path: '/editprofile',
+            component: editProfile,
             meta: {auth: true}
         },
         {

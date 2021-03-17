@@ -5,6 +5,8 @@
           v-if="showProfile"
           @closeProfileInfo="closeProfileInfo"
       >
+
+
       </profile>
     </template>
     <v-app id="dayspan" v-cloak>
@@ -63,6 +65,12 @@
             <strong class="ds-ev-title">{{ details.title }}</strong>
           </div>
           <div class="ds-ev-description">{{ getCalendarTime(calendarEvent) }}</div>
+        </template>
+        <template slot="drawerBottom">
+          <div class="pa-3">
+            <v-btn to="/userList"
+            >Список сотрудников</v-btn>
+          </div>
         </template>
 
       </ds-calendar-app>
