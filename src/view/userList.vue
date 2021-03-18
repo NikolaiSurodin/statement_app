@@ -22,9 +22,6 @@
 
 <script>
 
-
-import axios from "axios";
-
 export default {
   name: "userList",
   data() {
@@ -129,7 +126,7 @@ export default {
 
   },
   mounted() {
-    this.register()
+
   }
 }
 </script>

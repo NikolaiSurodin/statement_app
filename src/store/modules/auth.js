@@ -55,9 +55,9 @@ export default {
         infoUser({commit}) {
             return new Promise(resolve => {
                 axios
-                    .get('https://vacation-api.thirty3.tools/api/v1/frontend/auth/me?expand=profile')
+                    .get('https://vacation-api.thirty3.tools/api/v1/frontend/me?expand=profile')
                     .then(response => {
-                        const user = response.data
+                        const user = response.data.data.find(user => user)
                         commit('set_user', user)
                         resolve(response)
                     })

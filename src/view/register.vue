@@ -116,7 +116,7 @@ export default {
       ],
       mobileRules: [
         v => !!v || 'Заполните номер телефона',
-        v => /.79.+/.test && v.length === 12 || 'Проверьте, пожалуйста, телефон',
+        v => /.79.+/.test && v.length === 11 || 'Проверьте, пожалуйста, телефон',
       ],
       passwordRules: [
         v => !!v || 'Введите пароль!',
@@ -154,7 +154,7 @@ export default {
         this.user.passwordConfirm = ''
       } else {
         this.$store.dispatch('register', user)
-            .then(() => this.$router.push('/calendar'))
+            .then(() => this.$router.push('/login'))
             .catch((error) => {
               console.log(error)
             })

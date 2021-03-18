@@ -11,11 +11,10 @@
         ></v-text-field>
 
         <v-text-field
-            v-model="lastname"
+            v-model="user.profile.last_name"
             :rules="nameRules"
             :counter="10"
             label="Фамилия"
-            required
         ></v-text-field>
 
         <v-text-field
@@ -27,17 +26,22 @@
 
         <v-text-field
             type="number"
-            v-model="mobile"
+            v-model="user.profile.mobile"
             :rules="mobileRules"
             label="Телефон"
             required
         ></v-text-field>
 
         <v-text-field
-            v-model="birthday"
+            v-model="user.birthday"
             :rules="birthdayRules"
             label="День рождения"
             required
+        ></v-text-field>
+
+        <v-text-field
+            v-model="user.profile.country"
+            label="Страна"
         ></v-text-field>
 
         <v-checkbox
@@ -48,7 +52,7 @@
         ></v-checkbox>
 
         <div class="buttons">
-          <button class="v-btn" type="button" @click="saveDataUser" :disabled="!valid">
+          <button class="v-btn" type="button" @click="updateUser" :disabled="!valid">
             Отредактировать данные
             <i class="material-icons right">done</i>
           </button>
@@ -63,16 +67,23 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "editProfile",
   data() {
     return {
       valid: true,
-      firstname: '',
-      lastname: '',
-      mobile: 79,
-      address: '',
-      birthday: '',
+      user: {
+        firstname: '',
+        address: '',
+        birthday: '',
+        profile: {
+          mobile: 79,
+          lastname: '',
+          country:''
+        }
+      },
       nameRules: [
         v => !!v || 'Имя обязательно',
         v => (v && v.length <= 10) || 'Заполните имя'
@@ -85,7 +96,7 @@ export default {
       ],
       mobileRules: [
         v => !!v || 'Заполните номер телефона',
-        v => (/.+79.+/.test && v.length) === 12 || 'Проверьте, пожалуйста, телефон',
+        v => /.79.+/.test && v.length === 11 || 'Проверьте, пожалуйста, телефон',
       ],
       addressRules: [
         v => !!v || 'Проверьте адрес'
@@ -97,20 +108,28 @@ export default {
   },
 
   methods: {
-    saveDataUser() {
-      this.$router.push('/calendar')
-    },
     goOut() {
       this.$router.push('/calendar')
-    }
-  },
-  computed: {
-    user() {
-      return this.$store.getters.user
+    },
+    async info() {
+      return await axios
+          .get('https://vacation-api.thirty3.tools/api/v1/frontend/users/{id}?expand=profile'.replace('{id}', this.$route.params['id']))
+          .then(response => {
+            this.user = response.data
+          })
+    },
+    async updateUser() {
+      return await axios
+          .patch('https://vacation-api.thirty3.tools/api/v1/frontend/me/{id}'.replace('{id}', this.$route.params['id']), this.user)
+          .then(() => {
+            this.$root.$emit('save')
+            this.$router.push('/calendar')
+          })
     }
   },
   mounted() {
     this.$store.dispatch('infoUser')
+    this.info()
   }
 }
 </script>

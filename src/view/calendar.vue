@@ -19,7 +19,7 @@
         </template>
         <template slot="menuRight">
           <v-btn type="button" @click="showProfile = !showProfile">
-            <i class="material-icons">account_circle</i>{{user}}
+            <i class="material-icons">account_circle</i>{{user.username}}
           </v-btn>
           <v-btn href="#" class="black-text" @click.prevent="logout">
             <i class="material-icons">assignment_return</i>Выйти
@@ -112,6 +112,9 @@ export default {
     window.app = this.$refs.app;
     this.loadState();
     this.$store.dispatch('infoUser')
+    this.$root.$on('save', () => {
+      this.$store.dispatch('infoUser')
+    })
   },
   methods:
       {
