@@ -33,7 +33,6 @@ export default {
         },
         register({commit}, data) {
             return new Promise((resolve, reject) => {
-
                 axios({url: 'https://vacation-api.thirty3.tools/api/v1/frontend/users', data, method: 'POST'})
                     .then(response => {
                         const user = response.data
@@ -56,13 +55,12 @@ export default {
         infoUser({commit}) {
             return new Promise(resolve => {
                 axios
-                    .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/me')
+                    .get('https://vacation-api.thirty3.tools/api/v1/frontend/auth/me?expand=profile')
                     .then(response => {
                         const user = response.data
                         commit('set_user', user)
                         resolve(response)
                     })
-
             })
         },
         //проверка на то, залогинен ли пользователь уже или нет. check
@@ -73,7 +71,6 @@ export default {
             }
             return this.dispatch('logout')
         },
-
     },
     mutations: {
         auth_request(state) {

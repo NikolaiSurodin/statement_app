@@ -96,12 +96,12 @@ export default {
     return {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
       valid: false,
-      user:{
+      user: {
         firstname: '',
         lastname: '',
         email: '',
-        mobile:79,
-        birthday:'',
+        mobile: 79,
+        birthday: '',
         password: '',
         passwordConfirm: ''
       },
@@ -134,17 +134,30 @@ export default {
     register() {
       const user = {
         username: this.user.firstname,
-        password:this.user.password,
+        password: this.user.password,
         email: this.user.email,
-        birthday:this.user.birthday,
-        profile:{}
+        birthday: this.user.birthday,
+        profile: {
+          description: '',
+          title: '',
+          first_name: '',
+          last_name: '',
+          mobile: this.user.mobile,
+          city: '',
+          country: '',
+          region: '',
+          state: '',
+        }
       }
-      if (this.passwordConfirm !== this.password) {
-        this.password = ''
-        this.passwordConfirm = ''
+      if (this.user.passwordConfirm !== this.user.password) {
+        this.user.password = ''
+        this.user.passwordConfirm = ''
       } else {
         this.$store.dispatch('register', user)
-        this.$router.push('/calendar')
+            .then(() => this.$router.push('/calendar'))
+            .catch((error) => {
+              console.log(error)
+            })
       }
     }
   }

@@ -5,8 +5,6 @@
           v-if="showProfile"
           @closeProfileInfo="closeProfileInfo"
       >
-
-
       </profile>
     </template>
     <v-app id="dayspan" v-cloak>
@@ -21,7 +19,7 @@
         </template>
         <template slot="menuRight">
           <v-btn type="button" @click="showProfile = !showProfile">
-            <i class="material-icons">account_circle</i>{{user.username}}
+            <i class="material-icons">account_circle</i>{{user}}
           </v-btn>
           <v-btn href="#" class="black-text" @click.prevent="logout">
             <i class="material-icons">assignment_return</i>Выйти
@@ -90,7 +88,6 @@ export default {
   components: {Profile, MessageError},
   data() {
     return {
-      user:'',
       storeKey: 'dayspanState',
       showProfile: false,
       calendar: Calendar.months(),
@@ -114,7 +111,7 @@ export default {
   mounted() {
     window.app = this.$refs.app;
     this.loadState();
-    this.userInfo()
+    this.$store.dispatch('infoUser')
   },
   methods:
       {
@@ -161,19 +158,13 @@ export default {
         closeProfileInfo() {
           this.showProfile = false
         },
-        userInfo() {
-          return new Promise(resolve => {
-            axios({url: 'https://vacation-api.thirty3.tools/api/v1/admin/auth/me', method: 'GET'})
-                .then(response => {
-                  this.user = response.data
-                  resolve(response)
-                })
-          })
-        }
       },
   computed: {
     savedState() {
       return this.$store.getters.calendarState
+    },
+    user(){
+      return this.$store.getters.user
     },
     loggedIn() {
       return this.$store.getters.isLoggedIn
