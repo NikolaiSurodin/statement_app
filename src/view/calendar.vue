@@ -66,7 +66,7 @@
         </template>
         <template slot="drawerBottom">
           <div class="pa-3">
-            <v-btn to="/userList"
+            <v-btn to="/all_users"
             >Список сотрудников</v-btn>
           </div>
         </template>
@@ -81,7 +81,6 @@ import {Calendar, Weekday, Month} from 'dayspan';
 import Vue from 'vue';
 import MessageError from "@/components/messageError";
 import Profile from "@/view/profile";
-import axios from "axios";
 
 export default {
   name: 'calendar',
@@ -108,9 +107,11 @@ export default {
       ]
     }
   },
+  beforeMount() {
+    this.loadState()
+  },
   mounted() {
     window.app = this.$refs.app;
-    this.loadState();
     this.$store.dispatch('infoUser')
     this.$root.$on('save', () => {
       this.$store.dispatch('infoUser')

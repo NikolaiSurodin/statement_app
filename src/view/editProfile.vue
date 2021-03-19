@@ -6,14 +6,20 @@
             v-model="user.username"
             :rules="nameRules"
             :counter="10"
+            label="User name"
+            required
+        ></v-text-field>
+        <v-text-field
+            v-model="user.profile.first_name"
+            :rules="nameRules"
+            :counter="10"
             label="Имя"
             required
         ></v-text-field>
 
         <v-text-field
             v-model="user.profile.last_name"
-            :rules="nameRules"
-            :counter="10"
+            :counter="20"
             label="Фамилия"
         ></v-text-field>
 
@@ -75,13 +81,14 @@ export default {
     return {
       valid: true,
       user: {
-        firstname: '',
-        address: '',
+        username: '',
         birthday: '',
+        email:'',
         profile: {
           mobile: 79,
           lastname: '',
-          country:''
+          firstname: '',
+          country: ''
         }
       },
       nameRules: [

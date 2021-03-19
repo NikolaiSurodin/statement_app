@@ -25,6 +25,14 @@
       <v-form v-model="valid">
         <v-container class="container card">
           <v-text-field
+              v-model="user.username"
+              :rules="usernameRules"
+              :counter="10"
+              label="User name"
+              required
+          ></v-text-field>
+
+          <v-text-field
               v-model="user.firstname"
               :rules="nameRules"
               :counter="10"
@@ -118,6 +126,10 @@ export default {
         v => !!v || 'Заполните номер телефона',
         v => /.79.+/.test && v.length === 11 || 'Проверьте, пожалуйста, телефон',
       ],
+      usernameRules: [
+        v => !!v || 'Заполнить обязательно!',
+        v => v.length <= 20 || 'Максимальное количество символов - 20',
+      ],
       passwordRules: [
         v => !!v || 'Введите пароль!',
         v => v.length >= 7 || 'Пароль должен содержать минимум 7 символов',
@@ -133,14 +145,14 @@ export default {
     },
     register() {
       const user = {
-        username: this.user.firstname,
+        username: this.user.username,
         password: this.user.password,
         email: this.user.email,
         birthday: this.user.birthday,
         profile: {
           description: '',
           title: '',
-          first_name: '',
+          first_name: this.user.firstname,
           last_name: '',
           mobile: this.user.mobile,
           city: '',

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {store} from "@/store";
+import { store } from "@/store";
 
 
 export default {
@@ -52,17 +52,7 @@ export default {
                 reject()
             })
         },
-        infoUser({commit}) {
-            return new Promise(resolve => {
-                axios
-                    .get('https://vacation-api.thirty3.tools/api/v1/frontend/me?expand=profile')
-                    .then(response => {
-                        const user = response.data.data.find(user => user)
-                        commit('set_user', user)
-                        resolve(response)
-                    })
-            })
-        },
+
         //проверка на то, залогинен ли пользователь уже или нет. check
         //проверяем по условию
         checkAuth() {
@@ -85,9 +75,6 @@ export default {
             localStorage.setItem('token', token)
             state.token = localStorage.getItem('token')
         },
-        set_user(state, user) {
-            state.user = user
-        },
         auth_error(state) {
             state.status = 'error'
         },
@@ -98,12 +85,9 @@ export default {
         auth_register(state, user) {
             state.user = user
         }
-
-
     },
     getters: {
         token: state => state.token,
-        user: state => state.user,
         isLoggedIn: state => !!state.token
     }
 }

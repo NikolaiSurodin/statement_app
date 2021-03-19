@@ -29,7 +29,7 @@ const router = new Router({
             meta: {auth: true}
         },
         {
-            path: '/userList',
+            path: '/all_users',
             component: userList,
             meta: {auth: true}
         },
