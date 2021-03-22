@@ -11,7 +11,7 @@ export default {
                 axios
                     .get('https://vacation-api.thirty3.tools/api/v1/frontend/me?expand=profile')
                     .then(response => {
-                        const user = response.data.data.find(user => user)
+                        const user = [undefined, ...response.data.data].find(user => user) || ![].find(user => user)
                         commit('set_user', user)
                         resolve(response)
                     })
@@ -23,6 +23,21 @@ export default {
                 .then(response => {
                     const users = response.data.data
                     commit('all_users', users)
+                })
+        },
+        async infoUserById({commit}, payload) {
+            return await axios
+                .get(`https://vacation-api.thirty3.tools/api/v1/frontend/users/${payload}?expand=profile`)
+                .then(response => {
+                    const user = response.data
+                    commit('set_user', user)
+                })
+        },
+        async updateUser({commit}, payload) {
+            return await axios
+                .patch(`https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`, payload.value)
+                .then(() => {
+                    commit('set_user')
                 })
         }
     },

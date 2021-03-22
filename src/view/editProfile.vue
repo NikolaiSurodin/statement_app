@@ -3,14 +3,14 @@
     <v-form v-model="valid">
       <v-container class="container card">
         <v-text-field
-            v-model="user.username"
+            v-model="userModel.username"
             :rules="nameRules"
             :counter="10"
             label="User name"
             required
         ></v-text-field>
         <v-text-field
-            v-model="user.profile.first_name"
+            v-model="userModel.profile.first_name"
             :rules="nameRules"
             :counter="10"
             label="Имя"
@@ -18,13 +18,13 @@
         ></v-text-field>
 
         <v-text-field
-            v-model="user.profile.last_name"
+            v-model="userModel.profile.last_name"
             :counter="20"
             label="Фамилия"
         ></v-text-field>
 
         <v-text-field
-            v-model="user.email"
+            v-model="userModel.email"
             :rules="emailRules"
             label="E-mail"
             required
@@ -32,21 +32,21 @@
 
         <v-text-field
             type="number"
-            v-model="user.profile.mobile"
+            v-model="userModel.profile.mobile"
             :rules="mobileRules"
             label="Телефон"
             required
         ></v-text-field>
 
         <v-text-field
-            v-model="user.birthday"
+            v-model="userModel.birthday"
             :rules="birthdayRules"
             label="День рождения"
             required
         ></v-text-field>
 
         <v-text-field
-            v-model="user.profile.country"
+            v-model="userModel.profile.country"
             label="Страна"
         ></v-text-field>
 
@@ -80,10 +80,10 @@ export default {
   data() {
     return {
       valid: true,
-      user: {
+      userModel: {
         username: '',
         birthday: '',
-        email:'',
+        email: '',
         profile: {
           mobile: 79,
           lastname: '',
@@ -118,24 +118,21 @@ export default {
     goOut() {
       this.$router.push('/calendar')
     },
-    async info() {
-      return await axios
-          .get('https://vacation-api.thirty3.tools/api/v1/frontend/users/{id}?expand=profile'.replace('{id}', this.$route.params['id']))
-          .then(response => {
-            this.user = response.data
-          })
-    },
-    async updateUser() {
-      return await axios
-          .patch('https://vacation-api.thirty3.tools/api/v1/frontend/me/{id}'.replace('{id}', this.$route.params['id']), this.user)
-          .then(() => {
-            this.$root.$emit('save')
-            this.$router.push('/calendar')
-          })
+    updateUser() {
+      this.$store.dispatch('updateUser', {value: this.userModel, id: this.$route.params.id})
+      this.$root.$emit('save')
+      this.$router.push('/calendar')
     }
   },
+  computed: {
+    user() {
+      this.userModel = this.$store.getters.user
+      return this.userModel
+    }
+  },
+
   mounted() {
-    this.info()
+    this.$store.dispatch('infoUserById', this.$route.params.id)
   }
 }
 </script>
