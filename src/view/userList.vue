@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div>
+      <v-btn type="button" @click="toCalendar">Каледарь
+        <i class="material-icons left">assignment</i>
+      </v-btn>
+      <h2 class="title">Сотрудники компании.</h2>
+
+    </div>
+
+    <hr>
     <v-content>
       <v-data-table
           :headers="headers"
@@ -45,17 +54,26 @@ export default {
       ],
     }
   },
+  methods:{
+    toCalendar(){
+      this.$router.push('/calendar')
+    }
+  },
   computed: {
      users() {
        return this.$store.getters.users
      }
   },
   mounted() {
-    this.$store.dispatch('AllUsers')
+    this.$store.dispatch('allUsers')
   }
 }
 </script>
 
 <style scoped>
-
+.title{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 </style>

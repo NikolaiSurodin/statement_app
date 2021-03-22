@@ -135,7 +135,6 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('infoUser')
     this.info()
   }
 }

@@ -3,11 +3,11 @@ import axios from "axios";
 export default {
     state: {
         user: {},
-        users:[]
+        users: []
     },
     actions: {
-        infoUser({commit}) {
-            return new Promise(resolve => {
+        async infoUser({commit}) {
+            return await new Promise(resolve => {
                 axios
                     .get('https://vacation-api.thirty3.tools/api/v1/frontend/me?expand=profile')
                     .then(response => {
@@ -17,11 +17,11 @@ export default {
                     })
             })
         },
-        AllUsers({commit}) {
-            return axios
+        async allUsers({commit}) {
+            return await axios
                 .get('https://vacation-api.thirty3.tools/api/v1/frontend/users?expand=profile')
                 .then(response => {
-                  const users = response.data.data
+                    const users = response.data.data
                     commit('all_users', users)
                 })
         }
@@ -30,7 +30,7 @@ export default {
         set_user(state, user) {
             state.user = user
         },
-        all_users(state, users){
+        all_users(state, users) {
             state.users = users
         }
     },

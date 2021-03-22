@@ -107,11 +107,9 @@ export default {
       ]
     }
   },
-  beforeMount() {
-    this.loadState()
-  },
   mounted() {
-    window.app = this.$refs.app;
+    window.app = this.$refs.app
+    this.loadState()
     this.$store.dispatch('infoUser')
     this.$root.$on('save', () => {
       this.$store.dispatch('infoUser')
