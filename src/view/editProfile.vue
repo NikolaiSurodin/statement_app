@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="show">
     <v-form v-model="valid">
       <v-container class="container card">
         <v-text-field
@@ -79,6 +79,7 @@ export default {
   name: "editProfile",
   data() {
     return {
+      show: false,
       valid: true,
       userModel: {
         username: '',
@@ -126,13 +127,18 @@ export default {
   },
   computed: {
     user() {
-      this.userModel = this.$store.getters.user
-      return this.userModel
+      return this.$store.getters.user
     }
   },
 
+  beforeMount () {
+    this.$store.dispatch('infoUserById', this.$route.params.id).then(() => {
+      this.userModel = Object.create(this.user)
+    })
+  },
+
   mounted() {
-    this.$store.dispatch('infoUserById', this.$route.params.id)
+    this.show = true
   }
 }
 </script>
