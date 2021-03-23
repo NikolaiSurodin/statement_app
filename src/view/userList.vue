@@ -17,7 +17,7 @@
       >
         <template slot="items" slot-scope="props"
         >
-          <td class="text-xs-left">{{props.item.username}}</td>
+          <td class="text-xs-left">{{ props.item.username }}</td>
           <td>{{ props.item.profile.first_name }} {{ props.item.profile.last_name }}</td>
           <td class="text-xs-left"></td>
           <td class="text-xs-left"></td>
@@ -31,8 +31,6 @@
 </template>
 
 <script>
-
-import axios from "axios";
 
 export default {
   name: "userList",
@@ -54,15 +52,15 @@ export default {
       ],
     }
   },
-  methods:{
-    toCalendar(){
+  methods: {
+    toCalendar() {
       this.$router.push('/calendar')
     }
   },
   computed: {
-     users() {
-       return this.$store.getters.users
-     }
+    users() {
+      return this.$store.getters.users
+    }
   },
   mounted() {
     this.$store.dispatch('allUsers')
@@ -71,7 +69,7 @@ export default {
 </script>
 
 <style scoped>
-.title{
+.title {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;

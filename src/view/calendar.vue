@@ -19,7 +19,7 @@
         </template>
         <template slot="menuRight">
           <v-btn type="button" @click="showProfile = !showProfile">
-            <i class="material-icons">account_circle</i>{{user.username}}
+            <i class="material-icons">account_circle</i>{{ user.username }}
           </v-btn>
           <v-btn href="#" class="black-text" @click.prevent="logout">
             <i class="material-icons">assignment_return</i>Выйти
@@ -65,12 +65,12 @@
           <div class="ds-ev-description">{{ getCalendarTime(calendarEvent) }}</div>
         </template>
         <template slot="drawerBottom">
-          <div class="pa-3">
+          <div class="pa-3" v-if="superUser">
             <v-btn to="/all_users"
-            >Список сотрудников</v-btn>
+            >Список сотрудников
+            </v-btn>
           </div>
         </template>
-
       </ds-calendar-app>
     </v-app>
   </div>
@@ -114,6 +114,9 @@ export default {
     this.$root.$on('save', () => {
       this.$store.dispatch('infoUser')
     })
+  },
+  beforeMount() {
+    this.$store.dispatch('isSuperUser')
   },
   methods:
       {
@@ -165,11 +168,14 @@ export default {
     savedState() {
       return this.$store.getters.calendarState
     },
-    user(){
+    user() {
       return this.$store.getters.user
     },
     loggedIn() {
       return this.$store.getters.isLoggedIn
+    },
+    superUser() {
+      return this.$store.getters.isSuperUser
     }
   },
 }

@@ -3,7 +3,8 @@ import axios from "axios";
 export default {
     state: {
         user: {},
-        users: []
+        users: [],
+        superUser:null
     },
     actions: {
         async infoUser({commit}) {
@@ -39,6 +40,14 @@ export default {
                 .then(() => {
                     commit('set_user')
                 })
+        },
+        async isSuperUser({commit}) {
+            return await axios
+                .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/me')
+                .then(response => {
+                   const superUser = response.data.is_superuser
+                    commit('set_superUser', superUser)
+                })
         }
     },
     mutations: {
@@ -47,10 +56,14 @@ export default {
         },
         all_users(state, users) {
             state.users = users
+        },
+        set_superUser(state, superUser){
+            state.superUser = superUser
         }
     },
     getters: {
         user: state => state.user,
-        users: state => state.users
+        users: state => state.users,
+        isSuperUser: state => state.superUser
     }
 }

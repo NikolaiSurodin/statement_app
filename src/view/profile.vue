@@ -68,7 +68,7 @@ export default {
       return this.$store.getters.user
     }
   },
-  mounted() {
+  beforeMount() {
     return this.$store.dispatch('infoUser')
   }
 

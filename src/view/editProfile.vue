@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="show">
     <v-form v-model="valid">
       <v-container class="container card">
         <v-text-field
@@ -73,12 +73,12 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: "editProfile",
   data() {
     return {
+      show: false,
       valid: true,
       userModel: {
         username: '',
@@ -113,7 +113,6 @@ export default {
       ]
     }
   },
-
   methods: {
     goOut() {
       this.$router.push('/calendar')
@@ -126,13 +125,17 @@ export default {
   },
   computed: {
     user() {
-      this.userModel = this.$store.getters.user
-      return this.userModel
+      return this.$store.getters.user
     }
   },
-
-  mounted() {
+  beforeMount() {
     this.$store.dispatch('infoUserById', this.$route.params.id)
+        .then(() => {
+          this.userModel = Object.create(this.user)
+        })
+  },
+  mounted() {
+    this.show = true
   }
 }
 </script>
@@ -141,6 +144,5 @@ export default {
 .container {
   position: center;
   margin-left: 50px;
-
 }
 </style>
