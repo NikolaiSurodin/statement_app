@@ -5,22 +5,24 @@
 </template>
 
 <script>
-import {store} from "@/store"
 
 export default {
   name: 'App',
-  computed: {
-    error() {
-      return this.$store.getters.error
-    }
-  },
-  watch: {
-    error(err) {
-      console.log(err)
+  methods: {
+   async check() {
+      await this.$store.dispatch('checkAuth')
+      .then(() => {
+
+      })
+      .catch((err) => {
+        console.log(err)
+        this.$router.push('/register')
+      })
+
     }
   },
   beforeMount() {
-    this.$store.dispatch('checkAuth')
+    this.check()
   },
   mounted() {
     this.$root.$on('logout', () => {

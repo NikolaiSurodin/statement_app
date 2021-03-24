@@ -53,22 +53,25 @@ export default {
                 localStorage.removeItem('token')
                 delete axios.defaults.headers.common['Authorization']
                 resolve()
-                reject()
             })
         },
         //проверка на то, залогинен ли пользователь уже или нет. check
-        //проверяем по условию
+        //проверяем по условию 'https://vacation-api.thirty3.tools/api/v1/frontend/auth/me'
         checkAuth() {
             if (this.getters.isLoggedIn) {
                 this.dispatch('setAuthHeader')
-                axios.get('https://vacation-api.thirty3.tools/api/v1/frontend/auth/me')
-                    .then(() => {
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401){
-                           store.dispatch('logout')
-                        }
-                    })
+                return new Promise((resolve, reject) => {
+                    axios({url: 'https://vacation-api.thirty3.tools/api/v1/frontend/auth/me', method: 'GET'})
+                        .then(response => {
+                            resolve(response)
+                        })
+                        .catch(error => {
+                            if (error.status === 401) {
+                                this.dispatch('logout')
+                                reject(error)
+                            }
+                        })
+                })
             }
         },
     },

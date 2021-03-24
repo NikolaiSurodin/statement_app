@@ -34,12 +34,6 @@ export default {
                     commit('set_user', user)
                 })
         },
-        // async updateUser({commit}, payload) {
-        //     return await axios({url:`https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`, data: payload.value, method:'PATCH'})
-        //         .then(() => {
-        //             commit('set_user', payload.value)
-        //         })
-        // },
         async updateUser({commit}, payload) {
             return await axios({url: `https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`, data: payload.value, method: 'PATCH'})
                 .then(() => {
