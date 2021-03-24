@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(route => route.meta.auth) && !store.getters.isLoggedIn) {
         next('/register')
     } else {
-        next()
+       next()
     }
 })
 

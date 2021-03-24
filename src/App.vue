@@ -1,25 +1,34 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
 <script>
-import { store } from "@/store"
+import {store} from "@/store"
+
 export default {
-    name:'App',
+  name: 'App',
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error(err) {
+      console.log(err)
+    }
+  },
   beforeMount() {
-      store.dispatch('checkAuth')
-    .then(() => {
-    })
+    this.$store.dispatch('checkAuth')
   },
   mounted() {
-      this.$root.$on('logout',() =>{
-        this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push('/register')
-        })
-      })
+    this.$root.$on('logout', () => {
+      this.$store.dispatch('logout')
+          .then(() => {
+            this.$router.push('/register')
+          })
+    })
   }
 }
 </script>

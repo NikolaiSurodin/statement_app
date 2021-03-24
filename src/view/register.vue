@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div>
       <v-jumbotron
           :gradient="gradient"
@@ -139,6 +139,17 @@ export default {
       ]
     }
   },
+  computed:{
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch:{
+    error(err){
+      console.log(err)
+    }
+  },
+
   methods: {
     toLogin() {
       this.$router.push('/login')
@@ -197,5 +208,8 @@ export default {
 .description {
   text-align: center;
   margin-top: 50px;
+}
+.wrapper{
+  background-color: silver;
 }
 </style>

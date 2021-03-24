@@ -4,7 +4,7 @@ export default {
     state: {
         user: {},
         users: [],
-        superUser:null
+        superUser: null
     },
     actions: {
         async infoUser({commit}) {
@@ -34,18 +34,23 @@ export default {
                     commit('set_user', user)
                 })
         },
+        // async updateUser({commit}, payload) {
+        //     return await axios({url:`https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`, data: payload.value, method:'PATCH'})
+        //         .then(() => {
+        //             commit('set_user', payload.value)
+        //         })
+        // },
         async updateUser({commit}, payload) {
-            return await axios
-                .patch(`https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`, payload.value)
+            return await axios({url: `https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`, data: payload.value, method: 'PATCH'})
                 .then(() => {
-                    commit('set_user')
+                    commit('set_user', payload.value)
                 })
         },
         async isSuperUser({commit}) {
             return await axios
                 .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/me')
                 .then(response => {
-                   const superUser = response.data.is_superuser
+                    const superUser = response.data.is_superuser
                     commit('set_superUser', superUser)
                 })
         }
@@ -57,7 +62,7 @@ export default {
         all_users(state, users) {
             state.users = users
         },
-        set_superUser(state, superUser){
+        set_superUser(state, superUser) {
             state.superUser = superUser
         }
     },

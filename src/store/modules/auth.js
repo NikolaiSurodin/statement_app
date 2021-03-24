@@ -1,5 +1,6 @@
 import axios from "axios";
-import { store } from "@/store";
+import {store} from "@/store";
+import router from "@/router";
 
 
 export default {
@@ -21,6 +22,7 @@ export default {
                         resolve(response)
                     })// в случае ошибки вызывается мутация и очищается локалСторадж
                     .catch(error => {
+                        commit('set_error', error)
                         commit('auth_error')
                         localStorage.removeItem('token')
                         reject(error)
@@ -39,7 +41,9 @@ export default {
                         commit('auth_register', user, data)
                         resolve(response)
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        commit('set_error', err)
+                    })
             })
         },
         //разлогинивание. удаляем из локалсторажда токен + заголовок. Возвращает промис
@@ -52,14 +56,20 @@ export default {
                 reject()
             })
         },
-
         //проверка на то, залогинен ли пользователь уже или нет. check
         //проверяем по условию
         checkAuth() {
             if (this.getters.isLoggedIn) {
-                return this.dispatch('setAuthHeader')
+                this.dispatch('setAuthHeader')
+                axios.get('https://vacation-api.thirty3.tools/api/v1/frontend/auth/me')
+                    .then(() => {
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401){
+                           store.dispatch('logout')
+                        }
+                    })
             }
-            return this.dispatch('logout')
         },
     },
     mutations: {

@@ -111,8 +111,8 @@ export default {
                 hours: ['час', 'час'],
                 week: ['неделя', 'неделя'],
                 weeks: ['неделя', 'неделя'],
-                busy: 'Отпуск',
-                free: 'Отгул'
+                busy: 'Недоступен для связи',
+                free: 'Доступен для связи'
             }
         },
         dsCalendarEventChip: {
@@ -138,8 +138,8 @@ export default {
                 hours: ['час', 'час'],
                 week: ['неделя', 'неделя'],
                 weeks: ['неделя', 'неделя'],
-                busy: 'Отпуск',
-                free: 'Отгул'
+                busy: 'Недоступен для связи',
+                free: 'Доступен для связи'
             }
         },
         dsCalendarEventCreatePopover: {
@@ -160,15 +160,15 @@ export default {
                 hours: ['Час', 'hours'],
                 week: ['Неделя', 'weeks'],
                 weeks: ['Неделя', 'weeks'],
-                busy: 'Отпуск',
-                free: 'Отгул',
+                busy: 'Недоступен для связи',
+                free: 'Доступен для связи',
                 location: 'Add location',
                 description: 'Описание',
                 calendar: 'Calendar',
             },
             busyOptions: [
-                {text: 'Отпуск'},
-                {text: 'Отгул'}
+                {text: 'Недоступен для связи'},
+                {text: 'Доступен для связи'}
             ]
         },
         dsSchedule: {
@@ -198,8 +198,8 @@ export default {
                 }
             },
             busyOptions: [
-                {text: 'Отпуск'},
-                {text: 'Отгул'}
+                {text: 'Недоступен для связи'},
+                {text: 'Доступен для связи'}
             ]
         },
         dsScheduleActions: {

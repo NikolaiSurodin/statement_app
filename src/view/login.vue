@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <template>
       <message-error
           v-if="error"
@@ -123,5 +123,8 @@ export default {
 .title {
   text-align: center;
   margin-top: 20px;
+}
+.wrapper{
+  background-color: silver;
 }
 </style>

@@ -131,7 +131,7 @@ export default {
   beforeMount() {
     this.$store.dispatch('infoUserById', this.$route.params.id)
         .then(() => {
-          this.userModel = Object.create(this.user)
+          this.userModel = this.user
         })
   },
   mounted() {
