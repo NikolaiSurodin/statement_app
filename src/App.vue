@@ -11,14 +11,12 @@ export default {
   methods: {
    async check() {
       await this.$store.dispatch('checkAuth')
-      .then(() => {
+          .then(() => {
 
-      })
-      .catch((err) => {
-        console.log(err)
-        this.$router.push('/register')
-      })
+          })
+          .catch((err) => {
 
+          })
     }
   },
   beforeMount() {

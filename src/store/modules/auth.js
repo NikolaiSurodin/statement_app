@@ -1,7 +1,5 @@
 import axios from "axios";
 import {store} from "@/store";
-import router from "@/router";
-
 
 export default {
     state: {
@@ -56,11 +54,15 @@ export default {
             })
         },
         //проверка на то, залогинен ли пользователь уже или нет. check
-        //проверяем по условию 'https://vacation-api.thirty3.tools/api/v1/frontend/auth/me'
+        //проверяем по условию
+        // this.getters.isLoggedIn
+        //                     this.dispatch('setAuthHeader')
         checkAuth() {
-            if (this.getters.isLoggedIn) {
-                this.dispatch('setAuthHeader')
-                return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
+                if (this.getters.isLoggedIn) {
+                    this.dispatch('setAuthHeader')
+                    resolve()
+                } else {
                     axios({url: 'https://vacation-api.thirty3.tools/api/v1/frontend/auth/me', method: 'GET'})
                         .then(response => {
                             resolve(response)
@@ -68,12 +70,12 @@ export default {
                         .catch(error => {
                             if (error.status === 401) {
                                 this.dispatch('logout')
-                                reject(error)
                             }
                         })
-                })
-            }
-        },
+                    reject()
+                }
+            })
+        }
     },
     mutations: {
         auth_request(state) {

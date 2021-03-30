@@ -5,28 +5,29 @@
         <i class="material-icons left">assignment</i>
       </v-btn>
       <h2 class="title">Сотрудники компании.</h2>
-
     </div>
-
     <hr>
-    <v-content>
-      <v-data-table
-          :headers="headers"
-          :items="users"
-          class="elevation-1"
-      >
-        <template slot="items" slot-scope="props"
+    <div>
+      <v-content>
+        <v-data-table
+            :headers="headers"
+            :items="users"
+            class="elevation-1"
         >
-          <td class="text-xs-left">{{ props.item.username }}</td>
-          <td>{{ props.item.profile.first_name }} {{ props.item.profile.last_name }}</td>
-          <td class="text-xs-left"></td>
-          <td class="text-xs-left"></td>
-          <td class="text-xs-left">{{ props.item.profile.mobile }}</td>
-          <td class="text-xs-left"></td>
-          <td class="text-xs-left"></td>
-        </template>
-      </v-data-table>
-    </v-content>
+          <template slot="items" slot-scope="props"
+          >
+            <td class="text-xs-left">{{ props.item.username }}</td>
+            <td>{{ props.item.profile.first_name }} {{ props.item.profile.last_name }}</td>
+            <td class="text-xs-left"></td>
+            <td class="text-xs-left"></td>
+            <td class="text-xs-left">{{ props.item.profile.mobile }}</td>
+            <td class="text-xs-left"></td>
+            <td class="text-xs-left"></td>
+
+          </template>
+        </v-data-table>
+      </v-content>
+    </div>
   </div>
 </template>
 
@@ -60,10 +61,12 @@ export default {
   computed: {
     users() {
       return this.$store.getters.users
+
     }
   },
   mounted() {
     this.$store.dispatch('allUsers')
+
   }
 }
 </script>

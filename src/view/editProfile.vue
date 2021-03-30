@@ -1,6 +1,6 @@
 <template>
   <div v-if="show">
-    <v-form v-model="valid">
+    <v-form v-model="valid" >
       <v-container class="container card">
         <v-text-field
             v-model="userModel.username"
@@ -104,9 +104,6 @@ export default {
       mobileRules: [
         v => !!v || 'Заполните номер телефона',
         v => /.79.+/.test && v.length === 11 || 'Проверьте, пожалуйста, телефон',
-      ],
-      addressRules: [
-        v => !!v || 'Проверьте адрес'
       ],
       birthdayRules: [
         v => !!v || 'Проверьте дату рождения'

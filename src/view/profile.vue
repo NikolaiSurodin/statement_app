@@ -3,30 +3,30 @@
     <div class="popup_wrapper">
       <div class='popup'>
         <div class="header-content">
-          <h1>{{user.username}}</h1>
+          <h1>
+            <i class="material-icons">account_circle</i>
+            {{ user.profile.first_name }} {{ user.profile.last_name }}
+          </h1>
+          <h5>{{ user.email }}</h5>
         </div>
         <div class="popup__header">
           <slot></slot>
         </div>
         <div class="popup__content">
           <div>
-            <h3>Общие</h3>
             <div class="right">
-              <p>email: </p>
-              <p>телефон</p>
-              <p>адрес</p>
             </div>
           </div>
         </div>
         <div class="popup__footer">
           <div class="container">
             <div class="bt">
-              <v-btn color="success" @click="closeProfile"
-              > OK
-              </v-btn>
               <v-btn color="warning" @click="ToUserProfile"
               > Редактировать профиль
                 <i class="material-icons right">edit</i>
+              </v-btn>
+              <v-btn color="success" @click="closeProfile"
+              > Закрыть
               </v-btn>
             </div>
           </div>
@@ -59,12 +59,12 @@ export default {
     closeProfile() {
       this.$emit('closeProfileInfo')
     },
-    ToUserProfile(){
+    ToUserProfile() {
       this.$router.push(`/editprofile/${this.user.id}`)
     }
   },
   computed: {
-    user(){
+    user() {
       return this.$store.getters.user
     }
   },
@@ -119,7 +119,8 @@ export default {
 .header-content {
   text-align: center;
 }
-.bt{
+
+.bt {
   margin-top: 20px;
   margin-left: 120px;
 }

@@ -58,11 +58,9 @@
 </template>
 
 <script>
-import messageError from "@/components/messageError";
 
 export default {
   name: "login",
-  components: {messageError},
   data() {
     return {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
