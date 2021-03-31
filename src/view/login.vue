@@ -18,7 +18,7 @@
               <h3 class="display-3">Календарь отпусков</h3>
               <div class="description">
                 <b>
-                  Введите данные для входа <br>
+                  Введите данные для входа: <br>
                 </b>
               </div>
             </v-flex>
@@ -46,10 +46,11 @@
           ></v-text-field>
 
           <div class="buttons">
-            <button class="v-btn" type="submit" @click.prevent="submitLogin" :disabled="!valid">
+            <v-btn type="submit" @click.prevent="submitLogin" :disabled="!valid">
               Войти!
               <i class="material-icons right">check_circle_outline</i>
-            </button>
+            </v-btn>
+            <v-btn type="button" to="/register">Регистрация</v-btn>
           </div>
         </v-container>
       </v-form>
@@ -58,9 +59,11 @@
 </template>
 
 <script>
+import messageError from "@/components/messageError";
 
 export default {
   name: "login",
+  components: {messageError},
   data() {
     return {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
@@ -122,7 +125,8 @@ export default {
   text-align: center;
   margin-top: 20px;
 }
-.wrapper{
+
+.wrapper {
   background-color: silver;
 }
 </style>

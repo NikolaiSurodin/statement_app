@@ -1,7 +1,7 @@
 <template>
   <div v-if="show">
-    <v-form v-model="valid" >
-      <v-container class="container card">
+    <v-form v-model="valid" class="form">
+      <v-container>
         <v-text-field
             v-model="userModel.username"
             :rules="nameRules"
@@ -138,8 +138,12 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  position: center;
+.form{
   margin-left: 50px;
+  position: center;
+  top: 500px;
+  width: 700px;
+  background: whitesmoke;
+  box-shadow: 0 0 17px 0 #e7e7e7;
 }
 </style>

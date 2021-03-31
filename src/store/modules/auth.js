@@ -21,7 +21,6 @@ export default {
                     })// в случае ошибки вызывается мутация и очищается локалСторадж
                     .catch(error => {
                         commit('set_error', error)
-                        commit('auth_error')
                         localStorage.removeItem('token')
                         reject(error)
                     })
@@ -90,7 +89,7 @@ export default {
             localStorage.setItem('token', token)
             state.token = localStorage.getItem('token')
         },
-        auth_error(state) {
+        set_error(state) {
             state.status = 'error'
         },
         logout(state) {
