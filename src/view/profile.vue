@@ -21,7 +21,7 @@
         <div class="popup__footer">
           <div class="container">
             <div class="bt">
-              <v-btn color="warning" @click="ToUserProfile"
+              <v-btn @click="ToUserProfile"
               > Редактировать профиль
                 <i class="material-icons right">edit</i>
               </v-btn>

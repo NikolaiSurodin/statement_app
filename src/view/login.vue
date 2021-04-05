@@ -50,7 +50,7 @@
               Войти!
               <i class="material-icons right">check_circle_outline</i>
             </v-btn>
-            <v-btn type="button" to="/register">Регистрация</v-btn>
+            <v-btn type="button" to="/">Регистрация</v-btn>
           </div>
         </v-container>
       </v-form>

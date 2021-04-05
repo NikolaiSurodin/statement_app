@@ -78,7 +78,7 @@
           ></v-text-field>
           <v-text-field
               v-model="user.birthday"
-              label="ДР"
+              label="День Рождения. Формат ГГГГ-ММ-ЧЧ"
               required
           ></v-text-field>
 

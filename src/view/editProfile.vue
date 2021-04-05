@@ -58,14 +58,14 @@
         ></v-checkbox>
 
         <div class="buttons">
-          <button class="v-btn" type="button" @click="updateUser" :disabled="!valid">
+          <v-btn type="button" @click="updateUser" :disabled="!valid">
             Отредактировать данные
             <i class="material-icons right">done</i>
-          </button>
-          <button class="v-btn" type="button" @click="goOut">
+          </v-btn>
+          <v-btn type="button" @click="goOut">
             Отмена
             <i class="material-icons right">highlight_off</i>
-          </button>
+          </v-btn>
         </div>
       </v-container>
     </v-form>
@@ -139,11 +139,13 @@ export default {
 
 <style scoped>
 .form{
-  margin-left: 50px;
-  position: center;
-  top: 500px;
-  width: 700px;
   background: whitesmoke;
   box-shadow: 0 0 17px 0 #e7e7e7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  margin-bottom: 1rem;
 }
 </style>

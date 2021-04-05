@@ -15,7 +15,7 @@ const router = new Router({
     mode: 'history',
     routes: [
         {
-            path: '/register',
+            path: '/',
             component: register
         },
         {
