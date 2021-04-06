@@ -11,11 +11,9 @@ export default {
   methods: {
     check() {
       this.$store.dispatch('checkAuth')
-          .then(() => {
-
-          })
+          .then(() => {})
           .catch((err) => {
-            console.log(err  + 'error')
+            console.log(err)
             this.$router.push('/')
           })
     }

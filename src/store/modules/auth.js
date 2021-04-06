@@ -88,9 +88,8 @@ export default {
                                 console.log(error)
                                 this.dispatch('logout')
                             }
+                            reject(error)
                         })
-                } else {
-                    reject(error => console.log(error))
                 }
             })
         }
