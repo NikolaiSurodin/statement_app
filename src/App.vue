@@ -9,13 +9,14 @@
 export default {
   name: 'App',
   methods: {
-   async check() {
-      await this.$store.dispatch('checkAuth')
+    check() {
+      this.$store.dispatch('checkAuth')
           .then(() => {
 
           })
           .catch((err) => {
-
+            console.log(err  + 'error')
+            this.$router.push('/')
           })
     }
   },
@@ -26,7 +27,7 @@ export default {
     this.$root.$on('logout', () => {
       this.$store.dispatch('logout')
           .then(() => {
-            this.$router.push('/register')
+            this.$router.push('/')
           })
     })
   }
