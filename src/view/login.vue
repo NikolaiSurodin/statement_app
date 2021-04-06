@@ -4,7 +4,9 @@
       <message-error
           v-if="error"
           @closePopup="closePopup"
-      />
+      >
+        <h3>Введеные данные не верны! Попробуйте еще раз!</h3>
+      </message-error>
     </template>
     <div>
       <v-jumbotron

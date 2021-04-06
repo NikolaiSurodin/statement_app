@@ -6,11 +6,11 @@
         <h1>ERROR</h1>
         </div>
         <div class="popup__header">
-          <slot></slot>
+
         </div>
         <div class="popup__content">
           <div>
-            <h3>Введеные данные не верны! Попробуйте еще раз!</h3>
+            <slot></slot>
           </div>
         </div>
         <div class="popup__footer">

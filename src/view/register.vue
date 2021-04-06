@@ -78,7 +78,7 @@
           ></v-text-field>
           <v-text-field
               v-model="user.birthday"
-              label="День Рождения. Формат ГГГГ-ММ-ЧЧ"
+              label="День Рождения. Формат: ГГГГ-ММ-ЧЧ"
               required
           ></v-text-field>
 
@@ -89,21 +89,29 @@
               <i class="material-icons right">grade</i>
             </button>
           </div>
-
         </v-container>
       </v-form>
     </div>
+    <message-error v-if="PasswordError"
+                   @closePopup="closePopup"
+    >
+      <h3>Проверьте пароль!</h3>
+    </message-error>
   </div>
 </template>
 
 <script>
 
+import MessageError from "@/components/messageError";
+
 export default {
   name: "register",
+  components: {MessageError},
   data() {
     return {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
       valid: false,
+      PasswordError: false,
       user: {
         firstname: '',
         lastname: '',
@@ -139,18 +147,10 @@ export default {
       ]
     }
   },
-  computed:{
-    error() {
-      return this.$store.getters.error
-    }
-  },
-  watch:{
-    error(err){
-      console.log(err)
-    }
-  },
-
   methods: {
+    closePopup() {
+      this.PasswordError = false
+    },
     toLogin() {
       this.$router.push('/login')
     },
@@ -173,6 +173,7 @@ export default {
         }
       }
       if (this.user.passwordConfirm !== this.user.password) {
+        this.PasswordError = true
         this.user.password = ''
         this.user.passwordConfirm = ''
       } else {
@@ -209,7 +210,8 @@ export default {
   text-align: center;
   margin-top: 50px;
 }
-.wrapper{
+
+.wrapper {
   background-color: silver;
 }
 </style>
