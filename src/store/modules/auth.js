@@ -41,7 +41,6 @@ export default {
                     })
                     .catch(err => {
                         commit('set_error', err)
-                        //console.log(err.response.data)
                         reject(err)
                     })
             })

@@ -1,11 +1,25 @@
 <template>
   <div>
     <div>
-      <v-btn type="button" @click="toCalendar">Каледарь
-        <i class="material-icons left">assignment</i>
-      </v-btn>
-      <h2 class="title">Сотрудники компании.</h2>
+      <v-toolbar
+          :height="50"
+      >
+        <v-toolbar-side-icon></v-toolbar-side-icon>
+        <v-toolbar-title>
+          <img src="../assets/logo-calendar.png" height="50"
+               width="60"/></v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <v-btn flat type="button" @click="toCalendar">
+            <i class="material-icons right">assignment</i>
+              Календарь
+          </v-btn>
+          <v-btn flat>Link Two</v-btn>
+          <v-btn flat>Link Three</v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
     </div>
+    <h3 class="title">Сотрудники компании.</h3>
     <hr>
     <div>
       <v-content>
@@ -17,7 +31,7 @@
           <template slot="items" slot-scope="props"
           >
             <td class="text-xs-left">{{ props.item.username }}</td>
-            <td style="color: crimson">{{ props.item.profile.first_name }} {{ props.item.profile.last_name }}</td>
+            <td style="color: #19b505">{{ props.item.profile.first_name }} {{ props.item.profile.last_name }}</td>
             <td class="text-xs-left"></td>
             <td class="text-xs-left"></td>
             <td class="text-xs-left">{{ props.item.profile.mobile }}</td>
@@ -28,6 +42,23 @@
         </v-data-table>
       </v-content>
     </div>
+    <v-footer
+        :height="50"
+        :fixed="true"
+        :color="'grey'"
+    >
+      <v-flex
+          primary
+          lighten-2
+          py-3
+          text-xs-center
+          white--text
+          xs12
+      >
+        &copy;2021 — <strong>GDS</strong>
+      </v-flex>
+    </v-footer>
+
   </div>
 </template>
 

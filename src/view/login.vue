@@ -1,63 +1,80 @@
 <template>
-  <div class="wrapper">
-    <template>
-      <message-error
-          v-if="error"
-          @closePopup="closePopup"
-      >
-        <h3>Введеные данные не верны! Попробуйте еще раз!</h3>
-      </message-error>
-    </template>
-    <div>
-      <v-jumbotron
-          :gradient="gradient"
-          dark
-          src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
-      >
-        <v-container fill-height>
-          <v-layout align-center>
-            <v-flex text-xs-center>
-              <h3 class="display-3">Календарь отпусков</h3>
-              <div class="description">
-                <b>
-                  Введите данные для входа: <br>
-                </b>
-              </div>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-jumbotron>
-      <v-form v-model="valid">
-        <v-container class="card">
-          <div class="text">
-            Введите данные для входа:
-          </div>
-          <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              label="E-mail"
-              required
-          ></v-text-field>
+    <div class="wrapper">
+      <template>
+        <message-error
+            v-if="error"
+            @closePopup="closePopup"
+        >
+          <h3>Введеные данные неверны! Попробуйте еще раз!</h3>
+        </message-error>
+      </template>
+      <div class="wrapper">
+        <v-jumbotron
+            :gradient="gradient"
+            :height="50"
+            dark
+            src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+        >
+          <v-container fill-height>
+            <v-layout align-center>
+              <v-flex text-xs-center>
+                <h3 class="display-3">Календарь отпусков</h3>
+                <div class="description">
+                  <b>
+                    Введите данные для входа: <br>
+                  </b>
+                </div>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-jumbotron>
+        <v-form v-model="valid">
+          <v-container class="card">
+            <div class="text">
+              Введите данные для входа:
+            </div>
+            <v-text-field
+                v-model="email"
+                :rules="emailRules"
+                label="E-mail"
+                required
+            ></v-text-field>
 
-          <v-text-field
-              v-model="password"
-              :rules="passwordRules"
-              label="Пароль"
-              type="password"
-              required
-          ></v-text-field>
+            <v-text-field
+                v-model="password"
+                :rules="passwordRules"
+                label="Пароль"
+                type="password"
+                required
+            ></v-text-field>
 
-          <div class="buttons">
-            <v-btn type="submit" @click.prevent="submitLogin" :disabled="!valid">
-              Войти!
-              <i class="material-icons right">check_circle_outline</i>
-            </v-btn>
-            <v-btn type="button" to="/">Регистрация</v-btn>
-          </div>
-        </v-container>
-      </v-form>
+            <div class="buttons">
+              <v-btn type="submit" @click.prevent="submitLogin" :disabled="!valid">
+                Войти!
+                <i class="material-icons right">check_circle_outline</i>
+              </v-btn>
+              <v-btn type="button" to="/">Регистрация</v-btn>
+            </div>
+          </v-container>
+        </v-form>
+      </div>
+      <v-footer
+      :height="50"
+      :fixed="true"
+      :color="'grey'"
+      >
+        <v-flex
+            primary
+            lighten-2
+            py-3
+            text-xs-center
+            white--text
+            xs12
+        >
+          &copy;2021 — <strong>GDS</strong>
+        </v-flex>
+      </v-footer>
     </div>
-  </div>
 </template>
 
 <script>
@@ -113,22 +130,14 @@ export default {
   margin-top: 20px;
   width: 500px;
   display: block;
-  background: linear-gradient(#e66465, #9198e5); /* Цвет фона */
-  outline: 2px solid #000; /* Чёрная рамка */
+  background: linear-gradient(#e3d4d4, #a3a3a9); /* Цвет фона */
   border: 3px solid #fff; /* Белая рамка */
-  border-radius: 10px;
+  border-radius: 30px;
+
+
 }
 
 .buttons {
   margin-top: 20px;
-}
-
-.title {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.wrapper {
-  background-color: silver;
 }
 </style>

@@ -22,7 +22,8 @@
             <i class="material-icons">account_circle</i>{{ user.username }}
           </v-btn>
           <v-btn href="#" class="black-text" @click.prevent="logout">
-            <i class="material-icons">assignment_return</i>Выйти
+            Выйти
+            <i class="material-icons">assignment_return</i>
           </v-btn>
         </template>
         <template slot="eventPopover" slot-scope="slotData">

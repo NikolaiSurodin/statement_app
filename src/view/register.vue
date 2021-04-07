@@ -196,9 +196,8 @@ export default {
   width: 500px;
   position: center;
   display: block;
-  margin-top: 50px;
-  background: linear-gradient(#e66465, #9198e5); /* Цвет фона */
-  outline: 2px solid #000; /* Чёрная рамка */
+  margin-top: 20px;
+  background: linear-gradient(#e9e2e2, #ffffff); /* Цвет фона */
   border: 3px solid #fff; /* Белая рамка */
   border-radius: 10px;
 }
@@ -213,6 +212,6 @@ export default {
 }
 
 .wrapper {
-  background-color: silver;
+
 }
 </style>
