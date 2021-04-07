@@ -1,6 +1,6 @@
 export default {
     state: {
-        savedState: JSON.parse(localStorage.getItem('calendarState')) ||  {}
+        savedState: JSON.parse(localStorage.getItem('calendarState')) ||  []
     },
     actions: {
         saveRecords({commit}, payload) {

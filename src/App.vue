@@ -14,7 +14,6 @@ export default {
           .then(() => {})
           .catch((err) => {
             console.log(err)
-            this.$router.push('/')
           })
     }
   },

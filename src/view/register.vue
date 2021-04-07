@@ -92,16 +92,17 @@
         </v-container>
       </v-form>
     </div>
-    <message-error v-if="PasswordError"
+    <message-error v-if="errors"
                    @closePopup="closePopup"
     >
-      <h3>Проверьте пароль!</h3>
+      <h3 v-for="(e, key) in errors"
+          :key="key"
+      >{{key}}: {{ e }}</h3>
     </message-error>
   </div>
 </template>
 
 <script>
-
 import MessageError from "@/components/messageError";
 
 export default {
@@ -112,6 +113,7 @@ export default {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
       valid: false,
       PasswordError: false,
+      errors: null,
       user: {
         firstname: '',
         lastname: '',
@@ -149,7 +151,7 @@ export default {
   },
   methods: {
     closePopup() {
-      this.PasswordError = false
+      this.errors = false
     },
     toLogin() {
       this.$router.push('/login')
@@ -173,14 +175,13 @@ export default {
         }
       }
       if (this.user.passwordConfirm !== this.user.password) {
-        this.PasswordError = true
         this.user.password = ''
         this.user.passwordConfirm = ''
       } else {
         this.$store.dispatch('register', user)
             .then(() => this.$router.push('/login'))
             .catch((error) => {
-              console.log(error)
+              this.errors = error.response.data
             })
       }
     }

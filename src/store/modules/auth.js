@@ -5,7 +5,8 @@ export default {
     state: {
         user: {},
         token: localStorage.getItem('token'),
-        status: ''
+        status: '',
+        error:''
     },
     actions: {
         // запрос на токен
@@ -40,6 +41,8 @@ export default {
                     })
                     .catch(err => {
                         commit('set_error', err)
+                        //console.log(err.response.data)
+                        reject(err)
                     })
             })
         },
@@ -52,29 +55,6 @@ export default {
                 resolve()
             })
         },
-        //проверка на то, залогинен ли пользователь уже или нет. check
-        //проверяем по условию
-        // this.getters.isLoggedIn
-        // this.dispatch('setAuthHeader')
-        // checkAuth() {
-        //     return new Promise((resolve, reject) => {
-        //         if (this.getters.isLoggedIn) {
-        //             this.dispatch('setAuthHeader')
-        //             resolve()
-        //         } else {
-        //             axios({url: 'https://vacation-api.thirty3.tools/api/v1/frontend/auth/me', method: 'GET'})
-        //                 .then(response => {
-        //                     resolve(response)
-        //                 })
-        //                 .catch(error => {
-        //                     if (error.status === 401) {
-        //                         this.dispatch('logout')
-        //                     }
-        //                 })
-        //             reject()
-        //         }
-        //     })
-        // }
         checkAuth() {
             return new Promise((resolve, reject) => {
                 if (this.getters.isLoggedIn) {
@@ -88,8 +68,9 @@ export default {
                                 console.log(error)
                                 this.dispatch('logout')
                             }
-                            reject(error)
                         })
+                } else {
+                    reject()
                 }
             })
         }
