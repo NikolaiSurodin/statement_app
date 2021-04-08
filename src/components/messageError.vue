@@ -3,7 +3,9 @@
     <div class="popup_wrapper">
       <div class='popup'>
         <div class="header-content">
-        <h1>ERROR</h1>
+          <h1>ERROR
+            <span class="material-icons">error</span>
+          </h1>
         </div>
         <div class="popup__header">
 
@@ -16,9 +18,9 @@
         <div class="popup__footer">
           <div class="container">
             <div class="bt">
-            <v-btn color="warning" @click="closePopup"
-            > OK
-            </v-btn>
+              <v-btn color="warning" @click="closePopup"
+              > OK
+              </v-btn>
             </div>
           </div>
 
@@ -32,12 +34,10 @@
 export default {
   name: "messageError",
   data() {
-    return {
-
-    }
+    return {}
   },
-  methods:{
-    closePopup(){
+  methods: {
+    closePopup() {
       this.$emit('closePopup')
     }
   }
@@ -88,7 +88,8 @@ export default {
 .header-content {
   text-align: center;
 }
-.bt{
+
+.bt {
   margin-top: 20px;
   margin-left: 120px;
 }

@@ -104,6 +104,7 @@
 
 <script>
 import MessageError from "@/components/messageError";
+import messages from "@/services/messages"
 
 export default {
   name: "register",

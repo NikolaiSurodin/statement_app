@@ -50,6 +50,29 @@
             label="Страна"
         ></v-text-field>
 
+        <v-btn flat small @click="expanded">{{expand ? 'Скрыть' : 'Расширенные настройки'}}</v-btn>
+        <div v-show="expand">
+
+          <v-form class="form">
+            <v-container>
+              <v-text-field
+                  v-model="userModel.profile.city"
+                  label="Город"
+              ></v-text-field>
+              <v-textarea
+                  v-model="userModel.profile.description"
+                  label="Описание"
+                  required
+              ></v-textarea>
+
+              <v-text-field
+                  v-model="userModel.profile.state"
+                  label="Должность"
+              ></v-text-field>
+            </v-container>
+          </v-form>
+        </div>
+
         <v-checkbox
             v-model="checkbox"
             :rules="[v => !!v || '']"
@@ -67,6 +90,7 @@
             <i class="material-icons right">highlight_off</i>
           </v-btn>
         </div>
+
       </v-container>
     </v-form>
   </div>
@@ -79,6 +103,7 @@ export default {
   data() {
     return {
       show: false,
+      expand:false,
       valid: true,
       userModel: {
         username: '',
@@ -88,7 +113,10 @@ export default {
           mobile: 79,
           lastname: '',
           firstname: '',
-          country: ''
+          country: '',
+          description:'',
+          city:'',
+          state:''
         }
       },
       nameRules: [
@@ -118,6 +146,9 @@ export default {
       this.$store.dispatch('updateUser', {value: this.userModel, id: this.$route.params.id})
       this.$root.$emit('save')
       this.$router.push('/calendar')
+    },
+    expanded(){
+      this.expand = !this.expand
     }
   },
   computed: {

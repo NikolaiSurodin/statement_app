@@ -2,12 +2,12 @@
   <div>
     <div>
       <v-toolbar
-          :height="50"
+          :height="64"
       >
         <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title>
-          <img src="../assets/logo-calendar.png" height="50"
-               width="60"/></v-toolbar-title>
+          <img src="../assets/logo-calendar.png" height="50" width="60"/>
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn flat type="button" @click="toCalendar">
@@ -15,7 +15,7 @@
               Календарь
           </v-btn>
           <v-btn flat>Link Two</v-btn>
-          <v-btn flat>Link Three</v-btn>
+          <v-btn flat @click="logout">Выйти</v-btn>
         </v-toolbar-items>
       </v-toolbar>
     </div>
@@ -31,12 +31,12 @@
           <template slot="items" slot-scope="props"
           >
             <td class="text-xs-left">{{ props.item.username }}</td>
-            <td style="color: #19b505">{{ props.item.profile.first_name }} {{ props.item.profile.last_name }}</td>
+            <td style="color: #19b505">{{ props.item.profile.first_name }} {{ props.item.profile.last_name}}</td>
             <td class="text-xs-left"></td>
             <td class="text-xs-left"></td>
-            <td class="text-xs-left">{{ props.item.profile.mobile }}</td>
-            <td class="text-xs-left"></td>
-            <td class="text-xs-left"></td>
+            <td class="text-xs-left">{{ props.item.profile.mobile ? props.item.profile.mobile : '-'}}</td>
+            <td class="text-xs-left">{{props.item.profile.state ? props.item.profile.state : '-' }}</td>
+            <td class="text-xs-left">{{props.item.profile.country}} {{props.item.profile.city ? props.item.profile.city : '-'}}</td>
 
           </template>
         </v-data-table>
@@ -80,13 +80,17 @@ export default {
 
         {text: 'День рождение', value: 'birthday'},
         {text: 'Телефон', value: 'mobile'},
-        {text: 'Должность', value: 'state'}
+        {text: 'Должность', value: 'state'},
+        {text: 'Страна, город', value: 'country'}
       ],
     }
   },
   methods: {
     toCalendar() {
       this.$router.push('/calendar')
+    },
+    logout(){
+      this.$root.$emit('logout')
     }
   },
   computed: {
@@ -105,7 +109,7 @@ export default {
 <style scoped>
 .title {
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-bottom: 40px;
 }
 </style>
