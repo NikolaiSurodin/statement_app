@@ -34,7 +34,7 @@ const router = new Router({
             meta: {auth: true}
         },
         {
-            path: '/editprofile/:id',
+            path: '/edit_profile/:id',
             meta: {auth: true},
             component: {
                 render(c) {

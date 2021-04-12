@@ -83,7 +83,9 @@
           ></v-text-field>
 
           <div class="buttons">
-            <button class="v-btn" type="button" @click="register" :disabled="!valid">Зарегистрироваться!</button>
+            <button class="v-btn" type="button" @click="register" :disabled="!valid">
+              Зарегистрироваться!
+            </button>
             <button class="v-btn" type="button" @click="toLogin">
               Есть аккаунт! Войти!
               <i class="material-icons right">grade</i>
@@ -97,14 +99,13 @@
     >
       <h3 v-for="(e, key) in errors"
           :key="key"
-      >{{key}}: {{ e }}</h3>
+      >{{ key }}: {{ e }}</h3>
     </message-error>
   </div>
 </template>
 
 <script>
 import MessageError from "@/components/messageError";
-import messages from "@/services/messages"
 
 export default {
   name: "register",

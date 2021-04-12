@@ -6,16 +6,16 @@
       >
         <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title>
-          <img src="../assets/logo-calendar.png" height="50" width="60"/>
+          <v-btn type="button"depressed small @click="toCalendar">
+            <span class="material-icons">event</span>
+          </v-btn>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn flat type="button" @click="toCalendar">
-            <i class="material-icons right">assignment</i>
-              Календарь
+          <v-btn>Link Two</v-btn>
+          <v-btn @click="logout">
+            Выйти
           </v-btn>
-          <v-btn flat>Link Two</v-btn>
-          <v-btn flat @click="logout">Выйти</v-btn>
         </v-toolbar-items>
       </v-toolbar>
     </div>
@@ -30,7 +30,7 @@
         >
           <template slot="items" slot-scope="props"
           >
-            <td class="text-xs-left">{{ props.item.username }}</td>
+            <td class="text-xs-left">{{ props.item.username }}
             <td style="color: #19b505">{{ props.item.profile.first_name }} {{ props.item.profile.last_name}}</td>
             <td class="text-xs-left"></td>
             <td class="text-xs-left"></td>
@@ -55,7 +55,7 @@
           white--text
           xs12
       >
-        &copy;2021 — <strong>GDS</strong>
+        &copy; 2021 — <strong>GDS</strong>
       </v-flex>
     </v-footer>
 

@@ -1,10 +1,12 @@
 import Vue from 'vue'
+import App from './App.vue'
 import Vuetify from 'vuetify'
 import DaySpanVuetify from 'dayspan-vuetify'
-import App from './App.vue'
+
 import {store} from './store'
 import axios from "axios";
 import router from "@/router"
+
 import ru from "@/locales/ru"
 
 import 'vuetify/dist/vuetify.css'

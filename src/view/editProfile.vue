@@ -1,6 +1,25 @@
 <template>
   <div v-if="show">
-    <v-form v-model="valid" class="form">
+    <div>
+      <v-toolbar
+          :height="64"
+      >
+        <v-toolbar-side-icon></v-toolbar-side-icon>
+        <v-toolbar-title>
+          <router-link type="button" depressed small to="/calendar">
+            <span class="material-icons">event</span>
+          </router-link>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <v-btn>Link Two</v-btn>
+          <v-btn @click="logout">
+            Выйти
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+    </div>
+    <v-form v-model="valid">
       <v-container>
         <v-text-field
             v-model="userModel.username"
@@ -50,7 +69,9 @@
             label="Страна"
         ></v-text-field>
 
-        <v-btn flat small @click="expanded">{{expand ? 'Скрыть' : 'Расширенные настройки'}}</v-btn>
+        <v-btn flat small @click="expanded">
+          {{ expand ? 'Скрыть' : 'Дополнительные данные' }}
+        </v-btn>
         <div v-show="expand">
 
           <v-form class="form">
@@ -59,16 +80,17 @@
                   v-model="userModel.profile.city"
                   label="Город"
               ></v-text-field>
-              <v-textarea
-                  v-model="userModel.profile.description"
-                  label="Описание"
-                  required
-              ></v-textarea>
 
               <v-text-field
                   v-model="userModel.profile.state"
                   label="Должность"
               ></v-text-field>
+
+              <v-textarea
+                  v-model="userModel.profile.description"
+                  label="Описание"
+                  required
+              ></v-textarea>
             </v-container>
           </v-form>
         </div>
@@ -93,6 +115,23 @@
 
       </v-container>
     </v-form>
+    <v-footer
+        :height="50"
+        :fixed="false"
+        :color="'grey'"
+
+    >
+      <v-flex
+          primary
+          lighten-2
+          py-3
+          text-xs-center
+          white--text
+          xs12
+      >
+        &copy; 2021 — <strong>GDS</strong>
+      </v-flex>
+    </v-footer>
   </div>
 </template>
 
@@ -103,7 +142,7 @@ export default {
   data() {
     return {
       show: false,
-      expand:false,
+      expand: false,
       valid: true,
       userModel: {
         username: '',
@@ -114,9 +153,9 @@ export default {
           lastname: '',
           firstname: '',
           country: '',
-          description:'',
-          city:'',
-          state:''
+          description: '',
+          city: '',
+          state: ''
         }
       },
       nameRules: [
@@ -139,6 +178,9 @@ export default {
     }
   },
   methods: {
+    logout() {
+      this.$root.$emit('logout')
+    },
     goOut() {
       this.$router.push('/calendar')
     },
@@ -147,7 +189,7 @@ export default {
       this.$root.$emit('save')
       this.$router.push('/calendar')
     },
-    expanded(){
+    expanded() {
       this.expand = !this.expand
     }
   },
@@ -169,11 +211,12 @@ export default {
 </script>
 
 <style scoped>
-.form{
+.form {
   background: whitesmoke;
   box-shadow: 0 0 17px 0 #e7e7e7;
   display: flex;
-  flex-direction: column;
+  max-width: 800px;
+  position: center;
   align-items: center;
   padding: 1rem;
   border: 1px solid #eee;

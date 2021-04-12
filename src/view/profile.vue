@@ -4,7 +4,11 @@
       <div class='popup'>
         <div class="header-content">
           <h1>
-            <i class="material-icons">account_circle</i>
+            <v-avatar color="teal">
+            <span class="white--text headline">
+              {{avatar}}
+            </span>
+            </v-avatar>
             {{ user.profile.first_name }} {{ user.profile.last_name }}
           </h1>
           <h5>{{ user.email }}</h5>
@@ -25,7 +29,7 @@
               > Редактировать профиль
                 <i class="material-icons right">edit</i>
               </v-btn>
-              <v-btn color="success" @click="closeProfile"
+              <v-btn style="border-radius: 10%" @click="closeProfile"
               > Закрыть
               </v-btn>
             </div>
@@ -42,6 +46,7 @@ export default {
   name: "profile",
   data() {
     return {
+      avatar: '',
       valid: true,
       email: '',
       password: '',
@@ -59,7 +64,10 @@ export default {
       this.$emit('closeProfileInfo')
     },
     ToUserProfile() {
-      this.$router.push(`/editprofile/${this.user.id}`)
+      this.$router.push(`/edit_profile/${this.user.id}`)
+    },
+    avatarText() {
+      return this.avatar = this.user.profile.first_name.split('')[0]
     }
   },
   computed: {
@@ -69,6 +77,9 @@ export default {
   },
   beforeMount() {
     return this.$store.dispatch('infoUser')
+  },
+  mounted() {
+   this.avatarText()
   }
 
 }
@@ -93,8 +104,9 @@ export default {
   top: 500px;
   width: 700px;
   background: whitesmoke;
-  box-shadow: 0 0 17px 0 #e7e7e7;
+  box-shadow: 0 0 30px 0 #454343;
   z-index: 10;
+  display: inline;
 }
 
 .popup__header {
@@ -120,7 +132,7 @@ export default {
 }
 
 .bt {
-  margin-top: 20px;
+  margin-top: 50px;
   margin-left: 120px;
 }
 </style>

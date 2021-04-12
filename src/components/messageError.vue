@@ -64,7 +64,7 @@ export default {
   width: 700px;
   background: linear-gradient(#e66465, #9198e5);
   box-shadow: 0 0 17px 0 #e7e7e7;
-  z-index: 10;
+  z-index: 50;
 }
 
 .popup__header {
