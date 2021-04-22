@@ -14,6 +14,7 @@ export default {
           .then(() => {})
           .catch((err) => {
             console.log(err)
+            this.$router.push('/')
           })
     }
   },
@@ -21,6 +22,7 @@ export default {
     this.check()
   },
   mounted() {
+
     this.$root.$on('logout', () => {
       this.$store.dispatch('logout')
           .then(() => {

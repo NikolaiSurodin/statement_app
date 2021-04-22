@@ -63,9 +63,10 @@ export default {
                                 .then(response => resolve(response))
                         })
                         .catch((error) => {
-                            if (error.status === 401) {
+                            if (error.status === 401 && error.status === 404) {
                                 console.log(error)
                                 this.dispatch('logout')
+
                             }
                         })
                 } else {

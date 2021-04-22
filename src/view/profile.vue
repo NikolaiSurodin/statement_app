@@ -4,9 +4,9 @@
       <div class='popup'>
         <div class="header-content">
           <h1>
-            <v-avatar color="teal">
+            <v-avatar color="blue">
             <span class="white--text headline">
-              {{avatar}}
+              {{ avatar }}
             </span>
             </v-avatar>
             {{ user.profile.first_name }} {{ user.profile.last_name }}
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { User} from "@/classes/User";
 
 export default {
   name: "profile",
@@ -49,14 +50,7 @@ export default {
       avatar: '',
       valid: true,
       email: '',
-      password: '',
       error: false,
-      emailRules: [
-        v => /.+@.+/.test(v) || 'Проверьте, пожалуйста, E-mail',
-      ],
-      passwordRules: [
-        v => v.length >= 7 || 'Пароль должен содержать минимум 7 символов'
-      ]
     }
   },
   methods: {
@@ -65,21 +59,26 @@ export default {
     },
     ToUserProfile() {
       this.$router.push(`/edit_profile/${this.user.id}`)
-    },
-    avatarText() {
-      return this.avatar = this.user.profile.first_name.split('')[0]
     }
   },
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    avatarText() {
+      if (this.user.profile.first_name && this.user.profile.last_name) {
+        let avatarName = this.user.profile.first_name.split('')[0]
+        let avatarLastName = this.user.profile.last_name.split('')[0]
+        this.avatar = avatarName + avatarLastName
+      }else {
+        this.avatar = 'XX'
+      }
+
     }
   },
-  beforeMount() {
-    return this.$store.dispatch('infoUser')
-  },
   mounted() {
-   this.avatarText()
+    this.avatarText
+    console.log(this.user instanceof User)
   }
 
 }

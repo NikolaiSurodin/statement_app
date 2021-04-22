@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios from "axios"
+import {User} from "@/classes/User"
+import {Profile} from "@/classes/Profile";
 
 export default {
     state: {
@@ -12,8 +14,18 @@ export default {
                 axios
                     .get('https://vacation-api.thirty3.tools/api/v1/frontend/me?expand=profile')
                     .then(response => {
-                        const user = [undefined, ...response.data.data].find(user => user) || ![].find(user => user)
-                        commit('set_user', user)
+                        let option = [undefined, ...response.data.data].find(user => user) || ![].find(user => user)
+                        this.user = new User({
+                            username: option.username,
+                            birthday:option.birthday,
+                            email:option.email,
+                            password :option.password,
+                            id:option.id,
+                            profile: Profile,
+                            user_hide: option.user_hide
+                        })
+                        console.log(this.user instanceof User)
+                        commit('set_user', this.user)
                         resolve(response)
                     })
             })
@@ -35,7 +47,11 @@ export default {
                 })
         },
         async updateUser({commit}, payload) {
-            return await axios({url: `https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`, data: payload.value, method: 'PATCH'})
+            return await axios({
+                url: `https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`,
+                data: payload.value,
+                method: 'PATCH'
+            })
                 .then(() => {
                     commit('set_user', payload.value)
                 })

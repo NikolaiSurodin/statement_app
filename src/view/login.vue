@@ -48,12 +48,14 @@
               required
           ></v-text-field>
 
-          <div class="buttons">
+          <div class="submit">
             <v-btn type="submit" @click.prevent="submitLogin" :disabled="!valid">
               Войти
               <span class="material-icons">done</span>
             </v-btn>
-            <v-btn type="button" to="/">Регистрация</v-btn>
+            <div class="register">
+              <router-link to="/">Регистрация</router-link>
+            </div>
           </div>
         </v-container>
       </v-form>
@@ -137,8 +139,11 @@ export default {
 
 }
 
-.buttons {
+.submit {
   margin-top: 20px;
-  margin-left: 100px;
+  margin-left: 150px;
+}
+.register{
+  margin-left: 20px;
 }
 </style>
