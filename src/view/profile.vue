@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { User} from "@/classes/User";
 
 export default {
   name: "profile",
@@ -78,7 +77,7 @@ export default {
   },
   mounted() {
     this.avatarText
-    console.log(this.user instanceof User)
+    console.log(this.user)
   }
 
 }
