@@ -8,8 +8,8 @@ export default {
         superUser: null
     },
     actions: {
-        async infoUser({commit}) {
-            return await new Promise(resolve => {
+        infoUser({commit}) {
+            return new Promise(resolve => {
                 axios
                     .get('https://vacation-api.thirty3.tools/api/v1/frontend/me?expand=profile')
                     .then(response => {
@@ -20,39 +20,55 @@ export default {
                     })
             })
         },
-        async allUsers({commit}) {
-            return await axios
-                .get('https://vacation-api.thirty3.tools/api/v1/frontend/users?expand=profile')
-                .then(response => {
-                    const users = response.data.data
-                    commit('all_users', users)
-                })
-        },
-        async infoUserById({commit}, payload) {
-            return await axios
-                .get(`https://vacation-api.thirty3.tools/api/v1/frontend/users/${payload}?expand=profile`)
-                .then(response => {
-                    const user = response.data
-                    commit('set_user', user)
-                })
-        },
-        async updateUser({commit}, payload) {
-            return await axios({
-                url: `https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`,
-                data: payload.value,
-                method: 'PATCH'
+        allUsers({commit}) {
+            return new Promise(resolve => {
+                axios
+                    .get('https://vacation-api.thirty3.tools/api/v1/frontend/users?expand=profile')
+                    .then(response => {
+                        const users = response.data.data
+                        commit('all_users', users)
+                        resolve()
+                    })
             })
-                .then(() => {
-                    commit('set_user', payload.value)
-                })
         },
-        async isSuperUser({commit}) {
-            return await axios
-                .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/me')
-                .then(response => {
-                    const superUser = response.data.is_superuser
-                    commit('set_superUser', superUser)
+        infoUserById({commit}, payload) {
+            return new Promise(resolve => {
+                axios
+                    .get(`https://vacation-api.thirty3.tools/api/v1/frontend/users/${payload}?expand=profile`)
+                    .then(response => {
+                        const user = response.data
+                        commit('set_user', user)
+                    })
+                resolve()
+            })
+
+
+        },
+         updateUser({commit}, payload) {
+            return new Promise(resolve => {
+                axios({
+                    url: `https://vacation-api.thirty3.tools/api/v1/frontend/me/${payload.id}`,
+                    data: payload.value,
+                    method: 'PATCH'
                 })
+                    .then(() => {
+                        commit('set_user', payload.value)
+                    })
+                resolve()
+            })
+
+        },
+        isSuperUser({commit}) {
+            return new Promise(resolve => {
+                axios
+                    .get('https://vacation-api.thirty3.tools/api/v1/admin/auth/me')
+                    .then(response => {
+                        const superUser = response.data.is_superuser
+                        commit('set_superUser', superUser)
+                    })
+                resolve()
+            })
+
         }
     },
     mutations: {

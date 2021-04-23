@@ -136,7 +136,7 @@ export default {
         },
         saveState() { // сохранение в локалсторадже записей
           let records = this.calendar.toInput(true);
-          this.$store.dispatch('saveRecords', records)
+          this.$store.dispatch('saveRecords', {records})
         },
         loadState() {
           //показ при загрузке записей
