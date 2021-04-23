@@ -108,8 +108,8 @@
 import MessageError from "@/components/messageError";
 
 export default {
-  name: "register",
   components: {MessageError},
+  name: "register",
   data() {
     return {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',

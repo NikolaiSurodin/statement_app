@@ -136,7 +136,6 @@
 </template>
 
 <script>
-import { User } from "@/classes/User";
 
 export default {
   name: "editProfile",
@@ -207,7 +206,6 @@ export default {
   },
   mounted() {
     this.show = true
-    console.log(this.user)
   }
 }
 </script>

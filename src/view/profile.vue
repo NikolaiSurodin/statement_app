@@ -6,7 +6,7 @@
           <h1>
             <v-avatar color="blue">
             <span class="white--text headline">
-              {{ avatar }}
+              {{ avatarText }}
             </span>
             </v-avatar>
             {{ user.profile.first_name }} {{ user.profile.last_name }}
@@ -65,21 +65,9 @@ export default {
       return this.$store.getters.user
     },
     avatarText() {
-      if (this.user.profile.first_name && this.user.profile.last_name) {
-        let avatarName = this.user.profile.first_name.split('')[0]
-        let avatarLastName = this.user.profile.last_name.split('')[0]
-        this.avatar = avatarName + avatarLastName
-      }else {
-        this.avatar = 'XX'
-      }
-
+      return this.user.AvatarText
     }
-  },
-  mounted() {
-    this.avatarText
-    console.log(this.user)
   }
-
 }
 </script>
 
