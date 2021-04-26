@@ -22,8 +22,7 @@ export default {
                 axios({
                     url: 'https://vacation-api.thirty3.tools/api/v1/frontend/events',
                     data: {
-                        id : payload.id,
-                        user : '0f525e87-5a7a-4457-a463-8df3915b69c0',
+                        user : payload.id,
                         title : payload.title,
                         comment : payload.comment,
                         status : payload.status,
@@ -31,15 +30,13 @@ export default {
                         kind : payload.kind,
                         busy : payload.busy,
                         request : payload.request,
-                        date_from : '2021-04-26',
-                        date_to : '2021-04-28',
-                        created_at : payload.created_at,
-                        updated_at: payload.updated
+                        date_from :'' ,
+                        date_to : '',
                     },
                     method: 'POST'
                 })
                     .then(() => {
-                        state.savedState = payload
+                        state.savedState = data.options
                         console.log(payload)
                         localStorage.setItem('calendarState', JSON.stringify(state.savedState))
                     })
