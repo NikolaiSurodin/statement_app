@@ -1,4 +1,3 @@
-import {User} from "@/classes/User"
 
 class Event {
     constructor(options) {
