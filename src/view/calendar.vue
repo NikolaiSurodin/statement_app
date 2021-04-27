@@ -11,8 +11,8 @@
 
       <ds-calendar-app ref="app" v-if="loggedIn"
                        :calendar="calendar"
-                       :read-only="readOnly"
-                       @change="saveState">
+                       :read-only="readOnly">
+        //@change="saveState">
 
         <template slot="title">
           Календарь отпусков
@@ -135,22 +135,26 @@ export default {
           return (sa === ea) ? (sh + ' - ' + eh + ea) : (sh + sa + ' - ' + eh + ea);
         },
         saveState() { // сохранение в локалсторадже записей
-          let records = this.calendar.toInput(true);
-          let rec = {
-            user : this.user.id,
-            title : records.title,
-            comment : records.comment,
-            status : records.status,
-            //тип события (daysoff, vacation)
-            kind : records.kind,
-            busy : records.busy,
-            request : records.request,
-            date_from :,
-            date_to : ,
-          }
-
+          let records = this.calendar.toInput(true)
+          //let a = records
           console.log(records)
+          let rec = {
+            user: this.user.id,
+            title: this.ca.title,
+            comment: this.description,
+            status: this.status,
+            //тип события (daysoff, vacation)
+            kind: this.kind,
+            busy: this.busy,
+            request: this.request,
+            date_from: this.date_from,
+            date_to: this.date_to,
+          }
           this.$store.dispatch('saveRecords', rec)
+          console.log(rec)
+        },
+        add() {
+
         },
         loadState() {
           //показ при загрузке записей

@@ -1,7 +1,4 @@
 import axios from "axios"
-import { Event } from "@/classes/Event";
-import user from "@/store/modules/user";
-
 
 export default {
     state: {
@@ -12,7 +9,7 @@ export default {
         saveRecords({commit}, payload) {
             commit('saveEvents', payload)
         },
-        getRecords({commit}){
+        getRecords({commit}) {
             commit('getEvents')
         }
     },
@@ -22,21 +19,21 @@ export default {
                 axios({
                     url: 'https://vacation-api.thirty3.tools/api/v1/frontend/events',
                     data: {
-                        user : payload.id,
-                        title : payload.title,
-                        comment : payload.comment,
-                        status : payload.status,
+                        user: this.user.id,
+                        title: payload.title,
+                        comment: payload.description,
+                        status: payload.status,
                         //тип события (daysoff, vacation)
-                        kind : payload.kind,
-                        busy : payload.busy,
-                        request : payload.request,
-                        date_from :'' ,
-                        date_to : '',
+                        kind: payload.kind,
+                        busy: payload.busy,
+                        request: payload.request,
+                        date_from: '2021-04-26',
+                        date_to: '2021-04-28',
                     },
                     method: 'POST'
                 })
                     .then(() => {
-                        state.savedState = data.options
+                        state.savedState = payload
                         console.log(payload)
                         localStorage.setItem('calendarState', JSON.stringify(state.savedState))
                     })
@@ -49,7 +46,7 @@ export default {
                     .get('https://vacation-api.thirty3.tools/api/v1/frontend/events')
                     .then(response => {
                         state.savedState = response.data.data
-                        console.log(state.savedState)
+                        //console.log(state.savedState)
                         localStorage.setItem('calendarState', JSON.stringify(state.savedState))
                     })
             })
